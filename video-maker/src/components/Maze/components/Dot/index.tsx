@@ -4,13 +4,14 @@ import {
   VERTICAL_BORDER_WIDTH,
 } from "../../../../constants/sizes";
 import { MalleableProps } from "../../../../types/MalleableProps";
+import Neon from "../../../Neon";
 
 const Dot = ({ model }: MalleableProps) => {
   const binaries = BINARY_MODEL_BORDER[model];
-  const background = binaries[1] && binaries[2] ? "bg-amber-700" : "";
-  const className = `${VERTICAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT} ${background}`;
+  const hasLights = binaries[1] || binaries[2];
+  const className = `${VERTICAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT}`;
 
-  return <div className={className} />;
+  return <div className={className}>{hasLights ? <Neon /> : null}</div>;
 };
 
 export default Dot;

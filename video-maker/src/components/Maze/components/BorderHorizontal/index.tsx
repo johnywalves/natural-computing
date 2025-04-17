@@ -4,13 +4,14 @@ import {
   HORIZONTAL_BORDER_WIDTH,
 } from "../../../../constants/sizes";
 import { MalleableProps } from "../../../../types/MalleableProps";
+import Neon from "../../../Neon";
 
 const BorderHorizontal = ({ model }: MalleableProps) => {
   const binaries = BINARY_MODEL_BORDER[model];
-  const background = binaries[2] ? "bg-amber-700" : "";
-  const className = `${HORIZONTAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT} ${background}`;
+  const hasLights = binaries[2];
+  const className = `${HORIZONTAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT}`;
 
-  return <div className={className} />;
+  return <div className={className}>{hasLights ? <Neon /> : null}</div>;
 };
 
 export default BorderHorizontal;

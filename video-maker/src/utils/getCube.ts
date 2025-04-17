@@ -1,7 +1,7 @@
-import criarMatrizIdentidade from "./criarMatrizIdentidade";
-import multiplicarMatrizes from "./multiplicarMsatrizes";
+import { MazeProps } from "../components/Maze/components/types";
+import girar90Esquerda from "./girar90Esquerda";
 
-const getCube = (list: Array<number>) => {
+const getCube = (list: MazeProps["data"]) => {
   const dimension = Math.sqrt(list.length);
   const cube: Array<Array<number>> = [];
 
@@ -12,10 +12,7 @@ const getCube = (list: Array<number>) => {
     }
   }
 
-  const identity = criarMatrizIdentidade(dimension);
-  const result = multiplicarMatrizes(cube, identity);
-
-  return result;
+  return girar90Esquerda(cube);
 };
 
 export default getCube;
