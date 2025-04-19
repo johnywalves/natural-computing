@@ -4,14 +4,13 @@ import { LINE_BORDER_HEIGHT } from "../../../../constants/sizes";
 import Dot from "../Dot";
 import Line from "../Line";
 import BorderHorizontal from "../BorderHorizontal";
-import { MalleableProps } from "../../../../types/MalleableProps";
+import { MappedType } from "../../../../types/MappedType";
 
-const BorderLine = ({ line }: { line: Array<number> }) => (
+const BorderLine = ({ line }: { line: Array<MappedType> }) => (
   <Line height={LINE_BORDER_HEIGHT}>
     <Dot model={NEUTRAL_MODEL} />
 
-    {line.map((item, y) => {
-      const model = item as MalleableProps["model"];
+    {line.map(({ model }, y) => {
       return (
         <Fragment key={"block-" + y}>
           <BorderHorizontal key={"line-" + y} model={model} />

@@ -1,4 +1,5 @@
 import { MalleableProps } from "../types/MalleableProps";
+import { MappedType } from "../types/MappedType";
 
 // Top, Right, Bottom and Left
 export const BINARY_MODEL_BORDER: Record<number, Array<0 | 1>> = {
@@ -35,6 +36,11 @@ export const CLASSNAME_MODEL_BORDER: Record<number, string> = Object.keys(
 
 export const NEUTRAL_MODEL = 15 as MalleableProps["model"];
 
-export const NEUTRAL_LINE_MODEL = Array.from({ length: 16 }).map(
-  () => NEUTRAL_MODEL,
-);
+export const NEUTRAL_LINE_MODEL: Array<MappedType> = Array.from({
+  length: 16,
+}).map(() => ({
+  name: "",
+  model: NEUTRAL_MODEL,
+  mouse: () => 0,
+  path: () => 0,
+}));
