@@ -8,6 +8,7 @@ numpy = "*"
 pandas = "*"
 matplotlib = "*"
 fpdf2 = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

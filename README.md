@@ -4,8 +4,22 @@
 
 [Biblioteca de labirintos](https://github.com/micromouseonline/micromouse_maze_tool/tree/master/mazefiles/cfiles)
 
+## Algoritmos
+
 ```bash
-python3 genetic/bitstring.py
+pipenv shell
+```
+
+### Genético
+
+```bash
+python3 algorithms/genetic/report.py
+```
+
+## Perceptron
+
+```bash
+python3 algorithms/perceptron/report.py
 ```
 
 ## Referências
