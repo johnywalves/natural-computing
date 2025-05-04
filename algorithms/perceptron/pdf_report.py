@@ -9,9 +9,9 @@ class PDFReport(FPDF):
         self.add_font("Arial_ttf", "", "./assets/ARIAL.TTF")
         self.add_font("arial_ttf", "B", "./assets/ARIALBD.TTF")
 
-    def break_line(self, amount = 1):
+    def break_line(self, amount = 1, height = 5):
         self.set_font('Arial_ttf', '', 8)
-        self.multi_cell(0, 5, '\n' * amount, align='L')
+        self.multi_cell(0, height, '\n' * amount, align='L')
 
     def section(self, title):
         self.break_line()
@@ -34,9 +34,9 @@ class PDFReport(FPDF):
         self.chapter_body(body)
 
     # Converte a figura matplotlib para imagem e adiciona ao PDF
-    def add_plot(self, fig):
+    def add_plot(self, fig, x=10, w=190):
         img_data = BytesIO()
         fig.savefig(img_data, format='png', dpi=300)
         img_data.seek(0)
-        self.image(img_data, x=10, w=190)
+        self.image(img_data, x=x, w=w)
         self.break_line()

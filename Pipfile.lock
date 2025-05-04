@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1ce9a41e1758d329448d8dd6b6c759c95d7c9a7d909acdd15cdfbd29b0c53482"
+            "sha256": "17146e22e4fae531f40a5eca82cdabb2f659cfd56449a6f7a82d1eb3f85f2bef"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -162,11 +162,11 @@
         },
         "joblib": {
             "hashes": [
-                "sha256:06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6",
-                "sha256:2382c5816b2636fbd20a09e0f4e9dad4736765fdfb7dca582943b9c1366b3f0e"
+                "sha256:206144b320246485b712fc8cc51f017de58225fa8b414a1fe1764a7231aca491",
+                "sha256:d8757f955389a3dd7a23152e43bc297c2e0c2d3060056dad0feefc88a06939b5"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==1.4.2"
+            "markers": "python_version >= '3.9'",
+            "version": "==1.5.0"
         },
         "kiwisolver": {
             "hashes": [
@@ -612,6 +612,15 @@
             ],
             "markers": "python_version >= '3.10'",
             "version": "==1.15.2"
+        },
+        "seaborn": {
+            "hashes": [
+                "sha256:636f8336facf092165e27924f223d3c62ca560b1f2bb5dff7ab7fad265361987",
+                "sha256:93e60a40988f4d65e9f4885df477e2fdaff6b73a9ded434c1ab356dd57eefff7"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.13.2"
         },
         "six": {
             "hashes": [
