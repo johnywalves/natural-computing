@@ -31,14 +31,22 @@ const mapPath = ({ data, path }: MazeProps) => {
         const inRange = currentIndex !== -1;
         const prevIndex = currentIndex < delta;
 
-        return inRange && prevIndex && !mouseOpacity(delta) ? 1 : 0;
+        if (inRange && prevIndex && !mouseOpacity(delta)) {
+          if (currentIndex > delta - 5) {
+            return 1;
+          }
+
+          return currentIndex / (delta / 2);
+        }
+
+        return 0;
       };
 
       return {
         name: `pos-${x}-${y}`,
         model: item as MalleableProps["model"],
-        mouse: mouseOpacity,
-        path: pathOpacity,
+        fnMouse: mouseOpacity,
+        fnPath: pathOpacity,
       } as MappedType;
     });
   });

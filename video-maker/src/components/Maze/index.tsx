@@ -22,9 +22,9 @@ const Maze = ({ data, path }: MazeProps) => {
           <Line height={LINE_BLOCK_HEIGHT}>
             <BorderVertical model={NEUTRAL_MODEL} />
 
-            {line.map(({ name, model, mouse, path }) => (
+            {line.map(({ name, model, fnMouse, fnPath }) => (
               <Fragment key={name}>
-                <Block mouse={mouse(frame)} path={path(frame)} />
+                <Block mouse={fnMouse(frame)} path={fnPath(frame)} />
                 <BorderVertical model={model} />
               </Fragment>
             ))}
