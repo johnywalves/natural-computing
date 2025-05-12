@@ -2,11 +2,16 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
+    "axhline",
     "figsize",
+    "keepdims",
+    "linestyle",
+    "onehot",
     "rosenbrock",
     "xlabel",
     "xticks",
     "ylabel",
+    "ylim",
     "yticks"
   ]
 }

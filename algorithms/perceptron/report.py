@@ -5,7 +5,7 @@ from iris import run_iris
 from wine import run_wine
 from pdf_report import PDFReport
 from fpdf.enums import XPos, YPos
-from functions import SEGMENTS
+from functions import SEGMENTS, MAX_EPOCHS
 
 report_iris, class_iris = run_iris()
 report_vine, class_wine = run_wine()
@@ -44,6 +44,44 @@ def report_dataset(title, results, classes):
     pdf.multi_cell(col_width, line_height, results['learning_rate'], border=1, new_x=XPos.RIGHT, new_y=YPos.TOP)
     pdf.break_line()
 
+    # Relatório de evolução
+    plt.figure(figsize=(15, 5))
+
+    # Gráfico 1: Convergência treinamento
+    epoch_errors = results['epoch_errors']
+    plt.subplot(1, 3, 1)
+    plt.plot(range(1, MAX_EPOCHS+1), epoch_errors, marker='o')
+    plt.title('Convergência treinamento')
+    plt.xlabel('Época')
+    plt.ylabel('Erro')
+    plt.grid(True)
+
+    # Gráfico 2: Validação cruzada
+    plt.subplot(1, 3, 2)
+    plt.bar(range(1, len(results['cv_scores'])+1), results['cv_scores'])
+    plt.axhline(y=np.mean(results['cv_scores']), color='r', linestyle='--')
+    plt.title('Validação cruzada')
+    plt.xlabel('Fold')
+    plt.ylabel('Precisão')
+    plt.ylim([0, 1.1])
+    for i, score in enumerate(results['cv_scores']):
+        plt.text(i+1, score+0.02, f"{score:.3f}", ha='center')
+
+    # Gráfico 3: Curva aprendizado
+    train_sizes, train_scores, val_scores = results['learning_curve']
+    plt.subplot(1, 3, 3)
+    plt.plot(train_sizes, np.mean(train_scores, axis=1), 'o-', label='Training score')
+    plt.plot(train_sizes, np.mean(val_scores, axis=1), 'o-', label='Validation score')
+    plt.title('Learning Curve')
+    plt.xlabel('Training examples')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    pdf.add_plot(plt, x=10, w=190)
+    pdf.ln()
+
     # Resultado por segmentos
     for segment in SEGMENTS:
         accuracy = results[segment]['accuracy']
@@ -57,16 +95,16 @@ def report_dataset(title, results, classes):
         pdf.cell(0, 6, f"Precisão: {accuracy}")
         pdf.ln()
 
-        plt.figure(figsize=(16, 12))
+        plt.figure(figsize=(6, 4))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
         plt.title('Matriz de Confusão')
         plt.yticks(np.arange(3)+0.5, [x for x in classes_list_str])
         plt.xlabel('Preditos')
         plt.xticks(np.arange(3)+0.5, [x for x in classes_list_str])
         plt.ylabel('Positivos')
-        pdf.add_plot(plt, x=15, w=80)
 
-        pdf.break_line()
+        pdf.add_plot(plt, x=50, w=120)
+        pdf.ln()
 
 # Criar PDF
 pdf = PDFReport()
@@ -82,6 +120,15 @@ pdf.break_line()
 
 report_dataset('Iris Data Set', report_iris, class_iris)
 report_dataset('Wine Data Set', report_vine, class_wine)
+
+pdf.chapter_title('Escolha seu Conjunto de Dados e Redes Neurais')
+
+pdf.set_font('Arial_ttf', '', 10)
+pdf.cell(36, 6, 'https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset', align='L')
+pdf.ln()
+
+
+
 
 # Salvar PDF
 pdf.output('algorithms/perceptron/report.pdf')
