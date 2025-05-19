@@ -1,7 +1,12 @@
+import os
+import time
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import plot_model
+
+EPOCHS = 15
 
 # Carregar os dados
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -19,6 +24,7 @@ num_classes = 10
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
+# Perceptron Multicamadas
 def build_mlp_model():
     model = keras.Sequential([
         layers.Flatten(input_shape=(28, 28, 1)),
@@ -28,6 +34,7 @@ def build_mlp_model():
     ])
     return model
 
+# Rede Neural Convolucional
 def build_cnn_model():
     model = keras.Sequential([
         layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)),
@@ -40,6 +47,7 @@ def build_cnn_model():
     ])
     return model
 
+# Rede Neural Profunda Convolucional
 def build_deep_cnn_model():
     model = keras.Sequential([
         layers.Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(28, 28, 1)),
@@ -61,6 +69,7 @@ def build_deep_cnn_model():
     ])
     return model
 
+# Rede Neural Profunda Convolucional com Batch Normalization
 def build_cnn_bn_model():
     model = keras.Sequential([
         layers.Conv2D(32, kernel_size=(3, 3), input_shape=(28, 28, 1)),
@@ -83,36 +92,60 @@ def build_cnn_bn_model():
     return model
 
 # Função para compilar e treinar o modelo
-def train_and_evaluate(model):
+def train_and_evaluate(model, model_name, plot_name):
     optimizer = keras.optimizers.Adam(learning_rate=0.001)
     loss_fn = keras.losses.CategoricalCrossentropy()
+
+    # Compila o modelo
     model.compile(optimizer=optimizer, loss=loss_fn, metrics=['accuracy'])
     
-    history = model.fit(
+    # Treina o modelo e mede o tempo
+    start_time = time.time()
+    model.fit(
         x_train, y_train,
         batch_size=128,
-        epochs=15,
+        epochs=EPOCHS,
         validation_split=0.1,
         verbose=1
     )
-    
-    score = model.evaluate(x_test, y_test, verbose=0)
-    print(f"Test loss: {score[0]:.4f}")
-    print(f"Test accuracy: {score[1]:.4f}")
-    
-    return history, score
+    training_time = time.time() - start_time
+    avg_time_per_epoch = training_time / EPOCHS
 
-def main(): 
+    # Avalia o modelo
+    test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
+
+    # Coleta o número de parâmetros
+    params = model.count_params()
+
+    # Formata os dados para a tabela
+    params_str = f"~{params/1000:.0f}k" if params < 1e6 else f"~{params/1e6:.1f}M"
+
+    # Plotar formato da Rede Neural
+    model_image = os.path.join('figs', f"{plot_name}.jpg")
+    plot_model(model, model_image, show_shapes=True)
+
+    return {
+        "Arquitetura": model_name,
+        "Acurácia no Teste": f"{test_acc*100:.2f}%",
+        "Perdas": f"{test_loss*100:.2f}%",
+        "Tempo por Época": f"~{avg_time_per_epoch:.1f}s",
+        "Parâmetros": params_str,
+        "Plot": model_image
+    }
+
+def train_nn():
+    results = []
+
     mlp_model = build_mlp_model()
-    mlp_history, mlp_score = train_and_evaluate(mlp_model)
+    results.append(train_and_evaluate(mlp_model, 'Perceptron Multicamadas', 'mlp_model'))
 
     cnn_model = build_cnn_model()
-    cnn_history, cnn_score = train_and_evaluate(cnn_model)    
+    results.append(train_and_evaluate(cnn_model, 'Rede Neural Convolucional', 'cnn_model'))
 
     deep_cnn_model = build_deep_cnn_model()
-    deep_cnn_history, deep_cnn_score = train_and_evaluate(deep_cnn_model)
+    results.append(train_and_evaluate(deep_cnn_model, 'Rede Neural Profunda Convolucional', 'deep_cnn_model'))
 
     cnn_bn_model = build_cnn_bn_model()
-    cnn_bn_history, cnn_bn_score = train_and_evaluate(cnn_bn_model)
+    results.append(train_and_evaluate(cnn_bn_model, 'Rede Neural Profunda Convolucional com Batch Normalization', 'cnn_bn_model'))
 
-main()
+    return results

@@ -11,6 +11,8 @@ fpdf2 = "*"
 scikit-learn = "*"
 seaborn = "*"
 tensorflow = "*"
+pydot = "*"
+opencv-python = "*"
 
 [dev-packages]
 

@@ -39,4 +39,4 @@ class PDFReport(FPDF):
         fig.savefig(img_data, format='png', dpi=300)
         img_data.seek(0)
         self.image(img_data, x=x, w=w)
-        self.break_line()
+        self.ln()
