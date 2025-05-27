@@ -1,13 +1,15 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { LINE_WIDTH } from "../../../../constants/sizes";
 
 type LineProps = {
-  height: string;
+  style: CSSProperties;
   children: ReactNode;
 };
 
-const Line = ({ height, children }: LineProps) => (
-  <div className={`flex row ${LINE_WIDTH} ${height}`}>{children}</div>
+const Line = ({ style, children }: LineProps) => (
+  <div className="flex row" style={{ ...LINE_WIDTH, ...style }}>
+    {children}
+  </div>
 );
 
 export default Line;

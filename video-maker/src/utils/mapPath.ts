@@ -15,28 +15,34 @@ const mapPath = ({ data, path }: MazeProps) => {
       const posStr = `${x},${y}`;
 
       const mouseOpacity = (delta: number) => {
+        const moment = Math.ceil(delta) ?? 0;
+
         const { length } = pathTaken;
-        const currentIndex = pathTaken.indexOf(posStr);
+        const posLast = pathTaken[length - 1];
+        const posDelta = pathTaken[moment];
 
-        const inRange = currentIndex !== -1;
-        const curIndex = currentIndex === delta;
-        const afterIndex = length <= delta && pathTaken[length - 1] === posStr;
+        const outRange = length < moment;
+        const isLast = posLast === posStr;
+        const isDelta = posDelta === posStr;
 
-        return inRange && (curIndex || afterIndex) ? 1 : 0;
+        return isDelta || (outRange && isLast) ? 1 : 0;
       };
 
       const pathOpacity = (delta: number) => {
-        const currentIndex = pathTaken.indexOf(posStr);
+        const moment = Math.ceil(delta) ?? 0;
+        const list = pathTaken.slice(0, moment);
+
+        const currentIndex = list.lastIndexOf(posStr);
 
         const inRange = currentIndex !== -1;
-        const prevIndex = currentIndex < delta;
+        const prevIndex = currentIndex < moment;
 
-        if (inRange && prevIndex && !mouseOpacity(delta)) {
-          if (currentIndex > delta - 5) {
+        if (inRange && prevIndex) {
+          if (currentIndex > moment - 5) {
             return 1;
           }
 
-          return currentIndex / (delta / 2);
+          return currentIndex / delta;
         }
 
         return 0;

@@ -19,7 +19,7 @@ const Maze = ({ data, path }: MazeProps) => {
 
       {mazeScheme.map((line, y) => (
         <Fragment key={`line-${y + 1}`}>
-          <Line height={LINE_BLOCK_HEIGHT}>
+          <Line style={LINE_BLOCK_HEIGHT}>
             <BorderVertical model={NEUTRAL_MODEL} />
 
             {line.map(({ name, model, fnMouse, fnPath }) => (

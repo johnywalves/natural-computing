@@ -13,11 +13,20 @@ const Block = ({
 }) => {
   return (
     <div
-      className={`flex justify-center items-center font-bold uppercase ${BLOCK_WIDTH} ${BLOCK_HEIGHT}`}
+      className="flex justify-center items-center font-bold uppercase text-white "
+      style={{ ...BLOCK_WIDTH, ...BLOCK_HEIGHT }}
     >
-      {model ? model.toString(16) : null}
-      {mouse ? <Mouse opacity={mouse} /> : null}
-      {path ? <Path opacity={path} /> : null}
+      {model ? (
+        model.toString(10)
+      ) : (
+        <>
+          {mouse ? (
+            <Mouse opacity={mouse} />
+          ) : (
+            <>{path ? <Path opacity={path} /> : null}</>
+          )}
+        </>
+      )}
     </div>
   );
 };

@@ -22,6 +22,10 @@ python3 algorithms/genetic/report.py
 python3 algorithms/perceptron/report.py
 ```
 
+```bash
+python3 maze-resolve/resolve.py
+```
+
 ## Referências
 
 https://medium.com/@minikiraniamayadharmasiri/micromouse-from-scratch-algorithm-maze-traversal-shortest-path-floodfill-741242e8510

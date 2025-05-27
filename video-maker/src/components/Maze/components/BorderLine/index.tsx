@@ -7,7 +7,7 @@ import BorderHorizontal from "../BorderHorizontal";
 import { MappedType } from "../../../../types/MappedType";
 
 const BorderLine = ({ line }: { line: Array<MappedType> }) => (
-  <Line height={LINE_BORDER_HEIGHT}>
+  <Line style={LINE_BORDER_HEIGHT}>
     <Dot model={NEUTRAL_MODEL} />
 
     {line.map(({ model }, y) => {

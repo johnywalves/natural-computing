@@ -9,9 +9,12 @@ import Neon from "../../../Neon";
 const BorderHorizontal = ({ model }: MalleableProps) => {
   const binaries = BINARY_MODEL_BORDER[model];
   const hasLights = binaries[2];
-  const className = `${HORIZONTAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT}`;
 
-  return <div className={className}>{hasLights ? <Neon /> : null}</div>;
+  return (
+    <div style={{ ...HORIZONTAL_BORDER_WIDTH, ...HORIZONTAL_BORDER_HEIGHT }}>
+      {hasLights ? <Neon /> : null}
+    </div>
+  );
 };
 
 export default BorderHorizontal;

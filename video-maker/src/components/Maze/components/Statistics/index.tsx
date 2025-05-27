@@ -1,20 +1,22 @@
 import { useCurrentFrame } from "remotion";
 import { StatisticsProps } from "./types";
 
-const Statistics = ({ path }: StatisticsProps) => {
-  const frame = useCurrentFrame();
+const Info = ({ label, value }: { label: string; value: number }) => (
+  <p className="text-4xl">
+    <span className="font-light">{label}:</span>{" "}
+    <strong>{String(value)}</strong>
+  </p>
+);
 
+const Statistics = ({ episode, path }: StatisticsProps) => {
+  const frame = useCurrentFrame();
   const successInSteps = path.length;
 
   return (
     <div className="text-white">
-      <p>
-        <span className="font-light">Passos:</span> <strong>{frame + 1}</strong>
-      </p>
-      <p>
-        <span className="font-light">Sucesso:</span>{" "}
-        <strong>{successInSteps}</strong>
-      </p>
+      <Info label="Episódio" value={episode} />
+      <Info label="Passos" value={frame + 1} />
+      <Info label="Sucesso" value={successInSteps} />
     </div>
   );
 };

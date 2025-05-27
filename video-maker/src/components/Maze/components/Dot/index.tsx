@@ -8,10 +8,13 @@ import Neon from "../../../Neon";
 
 const Dot = ({ model }: MalleableProps) => {
   const binaries = BINARY_MODEL_BORDER[model];
-  const hasLights = binaries[1] || binaries[2];
-  const className = `${VERTICAL_BORDER_WIDTH} ${HORIZONTAL_BORDER_HEIGHT}`;
+  const hasLights = binaries[0] || binaries[1] || binaries[2];
 
-  return <div className={className}>{hasLights ? <Neon /> : null}</div>;
+  return (
+    <div style={{ ...VERTICAL_BORDER_WIDTH, ...HORIZONTAL_BORDER_HEIGHT }}>
+      {hasLights ? <Neon /> : null}
+    </div>
+  );
 };
 
 export default Dot;
