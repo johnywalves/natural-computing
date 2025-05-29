@@ -7,9 +7,8 @@ let prevFrom = 0;
 const MANIFEST_TAKEN = Manifesto.map(({ episode, path }) => {
   const duration = path.length;
   const from = prevFrom;
-
   prevFrom = prevFrom + duration;
-  return { episode, path, duration, from: from };
+  return { episode, path, duration, from };
 });
 
 const data = [
@@ -35,14 +34,12 @@ const data = [
   0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x02, 0x02, 0x0a, 0x03,
 ];
 
-export const MicroMouse = () => {
-  return (
-    <>
-      {MANIFEST_TAKEN.map(({ episode, path, duration, from }) => (
-        <Sequence key={episode} from={from} durationInFrames={duration}>
-          <MicroMouseTraining data={data} episode={episode} path={path} />
-        </Sequence>
-      ))}
-    </>
-  );
-};
+export const TrainingComposition = () => (
+  <>
+    {MANIFEST_TAKEN.map(({ episode, path, duration, from }) => (
+      <Sequence key={episode} from={from} durationInFrames={duration}>
+        <MicroMouseTraining data={data} episode={episode} path={path} />
+      </Sequence>
+    ))}
+  </>
+);

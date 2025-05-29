@@ -7,25 +7,26 @@ const mapPath = ({ data, path }: MazeProps) => {
   const cube = getCube(data);
 
   const pathTaken = path
-    .map((item) => [item[0], Math.abs(item[1] - 15)])
+    .map((item) => [item[0], item[1]])
     .map((item) => `${item[0]},${item[1]}`);
 
-  return cube.map((line, y) => {
-    return line.map((item, x) => {
-      const posStr = `${x},${y}`;
+  return cube.map((line, x) => {
+    return line.map((item, y) => {
+      const posX = Math.abs(x - 15);
+      const posY = y;
+      const posStr = `${posX},${posY}`;
 
       const mouseOpacity = (delta: number) => {
         const moment = Math.ceil(delta) ?? 0;
+        const list = pathTaken.slice(0, moment + 1);
 
-        const { length } = pathTaken;
-        const posLast = pathTaken[length - 1];
-        const posDelta = pathTaken[moment];
+        const { length } = list;
+        const posLast = list[length - 1];
 
         const outRange = length < moment;
         const isLast = posLast === posStr;
-        const isDelta = posDelta === posStr;
 
-        return isDelta || (outRange && isLast) ? 1 : 0;
+        return isLast || outRange ? 1 : 0;
       };
 
       const pathOpacity = (delta: number) => {
@@ -33,15 +34,10 @@ const mapPath = ({ data, path }: MazeProps) => {
         const list = pathTaken.slice(0, moment);
 
         const currentIndex = list.lastIndexOf(posStr);
-
         const inRange = currentIndex !== -1;
         const prevIndex = currentIndex < moment;
 
         if (inRange && prevIndex) {
-          if (currentIndex > moment - 5) {
-            return 1;
-          }
-
           return currentIndex / delta;
         }
 
@@ -49,7 +45,8 @@ const mapPath = ({ data, path }: MazeProps) => {
       };
 
       return {
-        name: `pos-${x}-${y}`,
+        pos: { x: posX, y: posY },
+        name: `position-${posX}-${posY}`,
         model: item as MalleableProps["model"],
         fnMouse: mouseOpacity,
         fnPath: pathOpacity,

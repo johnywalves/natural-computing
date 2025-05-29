@@ -1,26 +1,29 @@
 import numpy as np
 
+VERBOSE = False
+
 BINARY_MODEL_BORDER =  {
   0x00: [0, 0, 0, 0],
   0x01: [1, 0, 0, 0],
   0x02: [0, 1, 0, 0],
   0x03: [1, 1, 0, 0],
-  0x04: [0, 0, 1, 1],
+  0x04: [0, 0, 1, 0],
   0x05: [1, 0, 1, 0],
   0x06: [0, 1, 1, 0],
   0x07: [1, 1, 1, 0],
-  0x08: [1, 0, 0, 0],
+  0x08: [0, 0, 0, 1],
   0x09: [1, 0, 0, 1],
   0x0a: [0, 1, 0, 1],
   0x0b: [1, 1, 0, 1],
   0x0c: [0, 0, 1, 1],
   0x0d: [1, 0, 1, 1],
   0x0e: [0, 1, 1, 1],
-  0x0f: [1, 1, 1, 1],
+  0x0f: [1, 1, 1, 1], 
 }
 
 INITIAL_POSITION = (0, 0)
 
+# 3path_test.c
 labirinto = np.array([
   0x0e, 0x0a, 0x0a, 0x08, 0x0a, 0x0a, 0x0a, 0x08, 0x0a, 0x0a, 0x08, 0x0a, 0x0a,
   0x08, 0x0a, 0x09, 0x0c, 0x0a, 0x08, 0x02, 0x0a, 0x0a, 0x0a, 0x00, 0x0a, 0x0a,
@@ -42,7 +45,9 @@ labirinto = np.array([
   0x0b, 0x05, 0x05, 0x0c, 0x03, 0x06, 0x0a, 0x0a, 0x08, 0x0a, 0x03, 0x06, 0x0a,
   0x0a, 0x0a, 0x01, 0x0c, 0x02, 0x01, 0x06, 0x0a, 0x0a, 0x0a, 0x0a, 0x02, 0x0a,
   0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x02, 0x02, 0x0a, 0x03,
-]).reshape(16, 16)
+]).reshape(16, 16).T
+
+# print(labirinto)
 
 class LabirintoEnv:
     def __init__(self):
@@ -54,12 +59,7 @@ class LabirintoEnv:
         self.estado = INITIAL_POSITION
         return self.estado
     
-    def avaliar_movimento(self, action, novo_estado):
-        centro_x = novo_estado[0] in [7, 8]
-        centro_y = novo_estado[1] in [7, 8]
-        if (centro_x and centro_y):
-            return 2
-        
+    def avaliar_movimento(self, action, novo_estado):      
         x, y = self.estado
         code = labirinto[x, y]
         paredes = BINARY_MODEL_BORDER[code]
@@ -69,16 +69,20 @@ class LabirintoEnv:
         esquerda = paredes[3] == 0 and action == 2 # Esquerda
         direita = paredes[1] == 0 and action == 3 # Direita
         
-        # print('atual', x, y)
-        # print('novo', novo_estado[0], novo_estado[1])
-        # print('code', code)
-        # print('paredes', paredes)
-        # print('cima', cima)
-        # print('baixo', baixo)
-        # print('esquerda', esquerda)
-        # print('direita', direita)
+        if (VERBOSE):
+            print('code', code)
+            print('paredes', paredes)
+            print('cima', cima)
+            print('baixo', baixo)
+            print('esquerda', esquerda)
+            print('direita', direita)
 
         if (cima or direita or baixo or esquerda): 
+            centro_x = novo_estado[0] in [7, 8]
+            centro_y = novo_estado[1] in [7, 8]
+            if (centro_x and centro_y):
+                return 2
+
             return 0
         
         return -1
@@ -86,17 +90,18 @@ class LabirintoEnv:
     def passo(self, action):
         x, y = self.estado
         if action == 0:   # Cima
-            novo_estado = (x, y + 1)
-        elif action == 1: # Baixo
-            novo_estado = (x, y - 1)
-        elif action == 2: # Esquerda
-            novo_estado = (x - 1, y)
-        elif action == 3: # Direita
             novo_estado = (x + 1, y)
+        elif action == 1: # Baixo
+            novo_estado = (x - 1, y)
+        elif action == 2: # Esquerda
+            novo_estado = (x, y - 1)
+        elif action == 3: # Direita
+            novo_estado = (x, y + 1)
 
-        # print('==================')
-        # print('action', action)
-        # print(f"{x},{y} = {novo_estado[0]},{novo_estado[1]}")
+        if (VERBOSE):
+            print('==================')
+            print('action', action)
+            print(f"{x},{y} => {novo_estado[0]},{novo_estado[1]}")
 
         # Verifique se o novo estado é válido
         done = False
@@ -118,13 +123,7 @@ class LabirintoEnv:
 
         return self.estado, recompensa, done
 
-# env = LabirintoEnv()
-# env.reset()
-# print(env.passo(0)) # cima
-# print(env.passo(3)) # direita
-# print(env.passo(2)) # esquerda
-# print(env.passo(1)) # baixo
-# print(env.passo(0)) # cima
-# print(env.passo(0)) # cima
-# print(env.passo(0)) # cima
-# print(env.passo(3)) # direita
+if (VERBOSE):
+    env = LabirintoEnv()
+    env.reset()
+    print(env.passo(3)) # direita

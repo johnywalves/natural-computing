@@ -898,7 +898,7 @@ export const pathShowMaze = [
   [11, 1],
 ];
 
-export const ShowMaze = () => {
+export const SampleComposition = () => {
   return (
     <Sequence durationInFrames={pathShowMaze.length + 10}>
       <AbsoluteFill className="bg-gray-800 flex flex-row items-center justify-center p-18 relative gap-12">

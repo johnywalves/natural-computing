@@ -26,6 +26,7 @@ export const NEUTRAL_MODEL = 15 as MalleableProps["model"];
 export const NEUTRAL_LINE_MODEL: Array<MappedType> = Array.from({
   length: 16,
 }).map(() => ({
+  pos: { x: 0, y: 0 },
   name: "",
   model: NEUTRAL_MODEL,
   fnMouse: () => 0,

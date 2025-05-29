@@ -15,13 +15,13 @@ class FilePathTaken:
             arquivo.write("{\n")
             arquivo.write(f'"episode":{episode},\n')
             arquivo.write('"path": [\n')
-            arquivo.write(f"[{x},{y}],\n")
+            arquivo.write(f"[{x}, {y}]\n")
             arquivo.close()
 
     def add(self, estado):
         (x, y) = estado
         with open(self.manifesto, 'a') as arquivo:
-            arquivo.write(f"[{x},{y}],\n")
+            arquivo.write(f", [{x}, {y}]\n")
 
     def end(self):
         with open(self.manifesto, 'a') as arquivo:

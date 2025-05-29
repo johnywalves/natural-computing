@@ -31,6 +31,7 @@ for episodio in range(episodes):
     estado = env.reset()
     caminho = [estado]
     taken.start(episodio, estado)
+    print(f"episódio: {episodio + 1}")
 
     done = False
     while not done:

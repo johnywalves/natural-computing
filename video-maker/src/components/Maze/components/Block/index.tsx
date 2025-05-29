@@ -1,29 +1,38 @@
 import { BLOCK_HEIGHT, BLOCK_WIDTH } from "../../../../constants/sizes";
 import Path from "../../../Path";
 import Mouse from "../../../Mouse";
+import { BlockProps } from "./types";
 
 const Block = ({
+  x,
+  y,
   model,
   mouse,
   path,
-}: {
-  model?: number;
-  mouse: number;
-  path: number;
-}) => {
+  revealModel = false,
+  revealPosition = false,
+}: BlockProps) => {
   return (
     <div
-      className="flex justify-center items-center font-bold uppercase text-white "
+      className="flex justify-center items-center font-bold uppercase text-white"
       style={{ ...BLOCK_WIDTH, ...BLOCK_HEIGHT }}
     >
-      {model ? (
-        model.toString(10)
+      {revealPosition ? (
+        <>
+          {x}, {y}
+        </>
       ) : (
         <>
-          {mouse ? (
-            <Mouse opacity={mouse} />
+          {model && revealModel ? (
+            model.toString(10)
           ) : (
-            <>{path ? <Path opacity={path} /> : null}</>
+            <>
+              {mouse ? (
+                <Mouse opacity={mouse} />
+              ) : (
+                <>{path ? <Path opacity={path} /> : null}</>
+              )}
+            </>
           )}
         </>
       )}
