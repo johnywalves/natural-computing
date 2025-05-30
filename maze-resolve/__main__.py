@@ -1,35 +1,34 @@
 import random
+import os
 import numpy as np
-
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.optimizers import Adam
+from keras import Sequential, layers, optimizers
 
 from labirintoEnv import LabirintoEnv
 from filePathTaken import FilePathTaken
 
 def criar_modelo():
-    model = Sequential()
-    model.add(Dense(128, input_dim=2, activation='relu'))  # Entrada: (x, y)
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(4, activation='linear'))  # Saída: Q-valor para cada ação
-    model.compile(loss='mse', optimizer=Adam(learning_rate=0.001))
+    model = Sequential([
+        layers.Dense(128, input_dim=6, activation='relu'), # Entrada: (x, y, topo, direita, baixo, esquerda) 
+        layers.Dense(64, activation='relu'),
+        layers.Dense(4, activation='linear'),  # Saída: Q-valor para cada ação
+    ])
+    model.compile(loss='mse', optimizer=optimizers.Adam(learning_rate=0.001))
     return model
 
 # Iniciar instâncias 
 env = LabirintoEnv()
 taken = FilePathTaken()
 modelo = criar_modelo()
+os.system('cls' if os.name == 'nt' else 'clear')
 
 # Parâmetros de treinamento
 epsilon = 1.0  # Exploração inicial
 gamma = 0.95   # Fator de desconto
-episodes = 3
+episodes = 5   # Quantidade total de ciclos
 
 # Escrever arquivo do caminho
 for episodio in range(episodes):
     estado = env.reset()
-    caminho = [estado]
     taken.start(episodio, estado)
     print(f"episódio: {episodio + 1}")
 
@@ -39,18 +38,19 @@ for episodio in range(episodes):
         if random.uniform(0, 1) < epsilon:
             action = random.randint(0, 3)  # Exploração aleatória
         else:
-            q_values = modelo.predict(np.array([estado]), verbose=0)
-            action = np.argmax(q_values[0])  # Exploração da melhor ação
+            q_values = modelo.predict(env.apura_info(), verbose=0)  # Q-Learning Array<1, 4>
+            action = np.argmax(q_values[0])  # Exploração da melhor ação - Índice melhor resultado
 
         # Execute a ação e observe o próximo estado
         novo_estado, recompensa, done = env.passo(action)
+        info = env.apura_info()
         taken.add(novo_estado)
 
         # Atualize o modelo (Q-Learning)
-        alvo = recompensa + gamma * np.max(modelo.predict(np.array([novo_estado]), verbose=0))
-        q_values = modelo.predict(np.array([estado]), verbose=0)
+        q_values = modelo.predict(info, verbose=0)  # Q-Learning Array<1, 4>
+        alvo = recompensa + gamma * np.max(q_values)
         q_values[0][action] = alvo
-        modelo.fit(np.array([estado]), q_values, verbose=0)
+        modelo.fit(info, q_values, verbose=0)
 
         estado = novo_estado
         

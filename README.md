@@ -23,7 +23,7 @@ python3 algorithms/perceptron/report.py
 ```
 
 ```bash
-python3 maze-resolve/resolve.py
+python3 maze-resolve
 ```
 
 ## Referências

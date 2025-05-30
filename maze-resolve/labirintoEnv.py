@@ -47,7 +47,8 @@ labirinto = np.array([
   0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x02, 0x02, 0x0a, 0x03,
 ]).reshape(16, 16).T
 
-# print(labirinto)
+if (VERBOSE):
+    print(labirinto)
 
 class LabirintoEnv:
     def __init__(self):
@@ -55,14 +56,24 @@ class LabirintoEnv:
         self.estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
         self.n_acoes = 4  # Cima, Direita, Baixo, Esquerda
 
+    def apura_paredes(self, x, y):
+        code = labirinto[x, y]
+
+        if (VERBOSE):
+            print('code', code)
+
+        return BINARY_MODEL_BORDER[code]
+    
+    def apura_info(self):
+        paredes = self.apura_paredes(self.estado[0], self.estado[1])
+        return np.array([(self.estado[0], self.estado[1], paredes[0], paredes[1], paredes[2], paredes[3])])
+
     def reset(self):
         self.estado = INITIAL_POSITION
         return self.estado
     
-    def avaliar_movimento(self, action, novo_estado):      
-        x, y = self.estado
-        code = labirinto[x, y]
-        paredes = BINARY_MODEL_BORDER[code]
+    def avalia(self, action, novo_estado):
+        paredes = self.apura_paredes(self.estado[0], self.estado[1])
 
         cima = paredes[0] == 0 and action == 0 # Cima
         baixo = paredes[2] == 0 and action == 1 # Baixo
@@ -70,7 +81,6 @@ class LabirintoEnv:
         direita = paredes[1] == 0 and action == 3 # Direita
         
         if (VERBOSE):
-            print('code', code)
             print('paredes', paredes)
             print('cima', cima)
             print('baixo', baixo)
@@ -106,7 +116,7 @@ class LabirintoEnv:
         # Verifique se o novo estado é válido
         done = False
         if (0 <= novo_estado[0] < 16 and 0 <= novo_estado[1] < 16):
-            resultado = self.avaliar_movimento(action, novo_estado)
+            resultado = self.avalia(action, novo_estado)
             if resultado == 0:  # Caminho livre
                 self.estado = novo_estado
                 recompensa = -0.1
