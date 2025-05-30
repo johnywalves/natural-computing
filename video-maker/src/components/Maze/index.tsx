@@ -38,7 +38,7 @@ const Maze = ({ data, path }: MazeProps) => {
             ))}
           </Line>
 
-          <BorderLine line={line} />
+          <BorderLine id={`border-line-${x}`} line={line} />
         </Fragment>
       ))}
     </div>

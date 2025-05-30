@@ -24,7 +24,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 # Parâmetros de treinamento
 epsilon = 1.0  # Exploração inicial
 gamma = 0.95   # Fator de desconto
-episodes = 5   # Quantidade total de ciclos
+episodes = 10   # Quantidade total de ciclos
 
 # Escrever arquivo do caminho
 for episodio in range(episodes):

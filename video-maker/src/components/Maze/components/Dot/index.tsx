@@ -6,9 +6,10 @@ import {
 import { MalleableProps } from "../../../../types/MalleableProps";
 import Neon from "../../../Neon";
 
-const Dot = ({ model }: MalleableProps) => {
-  const binaries = BINARY_MODEL_BORDER[model];
-  const hasLights = binaries[0] || binaries[1] || binaries[2];
+const Dot = ({ curModel, nextModel }: MalleableProps) => {
+  const curWall = BINARY_MODEL_BORDER[curModel];
+  const nextWall = BINARY_MODEL_BORDER[nextModel];
+  const hasLights = curWall[1] || curWall[2] || nextWall[2] || nextWall[3];
 
   return (
     <div style={{ ...VERTICAL_BORDER_WIDTH, ...HORIZONTAL_BORDER_HEIGHT }}>

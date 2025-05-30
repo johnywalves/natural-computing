@@ -1,3 +1,4 @@
+import { LAST_STEPS } from "../constants/config";
 import { MazeProps } from "../components/Maze/components/types";
 import { MalleableProps } from "../types/MalleableProps";
 import { MappedType } from "../types/MappedType";
@@ -34,11 +35,12 @@ const mapPath = ({ data, path }: MazeProps) => {
         const list = pathTaken.slice(0, moment);
 
         const currentIndex = list.lastIndexOf(posStr);
+        const retroIndex = list.length - 1 - currentIndex;
         const inRange = currentIndex !== -1;
         const prevIndex = currentIndex < moment;
 
-        if (inRange && prevIndex) {
-          return currentIndex / delta;
+        if (inRange && prevIndex && retroIndex < LAST_STEPS) {
+          return 1 - retroIndex / LAST_STEPS;
         }
 
         return 0;
@@ -47,7 +49,7 @@ const mapPath = ({ data, path }: MazeProps) => {
       return {
         pos: { x: posX, y: posY },
         name: `position-${posX}-${posY}`,
-        model: item as MalleableProps["model"],
+        model: item as MalleableProps["curModel"],
         fnMouse: mouseOpacity,
         fnPath: pathOpacity,
       } as MappedType;

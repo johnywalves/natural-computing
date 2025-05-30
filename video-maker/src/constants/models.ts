@@ -21,7 +21,7 @@ export const BINARY_MODEL_BORDER: Record<number, Array<0 | 1>> = {
   0x0f: [1, 1, 1, 1],
 };
 
-export const NEUTRAL_MODEL = 15 as MalleableProps["model"];
+export const NEUTRAL_MODEL = 15 as MalleableProps["curModel"];
 
 export const NEUTRAL_LINE_MODEL: Array<MappedType> = Array.from({
   length: 16,

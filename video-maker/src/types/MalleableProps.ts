@@ -1,5 +1,6 @@
 import IntRange from "./IntRange";
 
 export type MalleableProps = {
-  model: IntRange<0, 15>;
+  curModel: IntRange<0, 15>;
+  nextModel: IntRange<0, 15>;
 };

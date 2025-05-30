@@ -1,14 +1,19 @@
 import { Sequence } from "remotion";
 import { MicroMouseTraining } from "./sequences/training";
 import Manifesto from "../../paths/manifesto.json";
+import { HistogramItem } from "../../types/HistogramItem";
 
 let prevFrom = 0;
+const history: Array<HistogramItem> = [];
 
 const MANIFEST_TAKEN = Manifesto.map(({ episode, path }) => {
   const duration = path.length;
   const from = prevFrom;
+  const histogram = [...history];
+
   prevFrom = prevFrom + duration;
-  return { episode, path, duration, from };
+  history.push({ duration });
+  return { episode, path, histogram, duration, from };
 });
 
 const data = [
@@ -36,9 +41,14 @@ const data = [
 
 export const TrainingComposition = () => (
   <>
-    {MANIFEST_TAKEN.map(({ episode, path, duration, from }) => (
+    {MANIFEST_TAKEN.map(({ episode, path, histogram, duration, from }) => (
       <Sequence key={episode} from={from} durationInFrames={duration}>
-        <MicroMouseTraining data={data} episode={episode} path={path} />
+        <MicroMouseTraining
+          data={data}
+          episode={episode}
+          path={path}
+          histogram={histogram}
+        />
       </Sequence>
     ))}
   </>

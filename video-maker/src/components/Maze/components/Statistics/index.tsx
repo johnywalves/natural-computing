@@ -1,36 +1,39 @@
 import { useCurrentFrame } from "remotion";
 import { StatisticsProps } from "./types";
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart } from "recharts";
+import { LINE_STATISTICS } from "../../../../constants/colors";
 
 const Info = ({ label, value }: { label: string; value: number }) => (
-  <p className="text-4xl">
-    <span className="font-light">{label}:</span>{" "}
-    <strong>{String(value)}</strong>
-  </p>
+  <div className="flex flex-row justify-between text-4xl">
+    <p className="font-light">{label}:</p>{" "}
+    <p>
+      <strong>{String(value)}</strong>
+    </p>
+  </div>
 );
 
-const Statistics = ({ episode, path }: StatisticsProps) => {
+const Statistics = ({ episode, path, histogram }: StatisticsProps) => {
   const frame = useCurrentFrame();
-  const successInSteps = path.length;
+  const currentStep = Math.min(path.length, frame + 1);
+
+  const data = episode !== 1 ? [...histogram, { duration: currentStep }] : [];
 
   return (
-    <div className="flex flex-col justify-between">
-      <div className="text-white">
+    <div className="h-full flex flex-col justify-between">
+      <div className="text-gray-100">
         <Info label="Episódio" value={episode} />
-        <Info label="Passos" value={frame + 1} />
-        <Info label="Sucesso" value={successInSteps} />
+        <Info label="Passos" value={currentStep} />
       </div>
 
-      {/* <LineChart
-        width={250}
-        height={500}
-        data={[{ length: 1500 }, { length: 800 }]}
-      >
-        <XAxis />
-        <YAxis />
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line dataKey="length" stroke="#8ae013" />
-      </LineChart> */}
+      <LineChart width={300} height={500} data={data}>
+        <CartesianGrid stroke="#eee" strokeDasharray="5" />
+        <Line
+          type="monotone"
+          dataKey="duration"
+          stroke={LINE_STATISTICS}
+          strokeWidth={5}
+        />
+      </LineChart>
     </div>
   );
 };

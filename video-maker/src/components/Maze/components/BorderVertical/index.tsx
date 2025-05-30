@@ -3,10 +3,10 @@ import {
   VERTICAL_BORDER_HEIGHT,
   VERTICAL_BORDER_WIDTH,
 } from "../../../../constants/sizes";
-import { MalleableProps } from "../../../../types/MalleableProps";
 import Neon from "../../../Neon";
+import { BorderVerticalProps } from "./types";
 
-const BorderVertical = ({ model }: MalleableProps) => {
+const BorderVertical = ({ model }: BorderVerticalProps) => {
   const binaries = BINARY_MODEL_BORDER[model];
   const hasLights = binaries[1];
 
