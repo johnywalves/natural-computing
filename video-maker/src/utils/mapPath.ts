@@ -7,9 +7,7 @@ import getCube from "./getCube";
 const mapPath = ({ data, path }: MazeProps) => {
   const cube = getCube(data);
 
-  const pathTaken = path
-    .map((item) => [item[0], item[1]])
-    .map((item) => `${item[0]},${item[1]}`);
+  const pathTaken = path.map(({ x, y }) => `${x},${y}`);
 
   return cube.map((line, x) => {
     return line.map((item, y) => {
@@ -21,13 +19,10 @@ const mapPath = ({ data, path }: MazeProps) => {
         const moment = Math.ceil(delta) ?? 0;
         const list = pathTaken.slice(0, moment + 1);
 
-        const { length } = list;
-        const posLast = list[length - 1];
-
-        const outRange = length < moment;
+        const posLast = list[list.length - 1];
         const isLast = posLast === posStr;
 
-        return isLast || outRange ? 1 : 0;
+        return isLast ? 1 : 0;
       };
 
       const pathOpacity = (delta: number) => {

@@ -2,18 +2,29 @@ import { Sequence } from "remotion";
 import { MicroMouseTraining } from "./sequences/training";
 import Manifesto from "../../paths/manifesto.json";
 import { HistogramItem } from "../../types/HistogramItem";
+import { MAZE_ADDITIONAL_FRAME } from "../../constants/config";
+import { getStatsPath } from "../../utils/getStatsPath";
 
 let prevFrom = 0;
 const history: Array<HistogramItem> = [];
 
 const MANIFEST_TAKEN = Manifesto.map(({ episode, path }) => {
-  const duration = path.length;
+  const statsPath = getStatsPath(path);
+
   const from = prevFrom;
   const histogram = [...history];
+  const duration = statsPath.length;
 
-  prevFrom = prevFrom + duration;
+  prevFrom = prevFrom + duration + MAZE_ADDITIONAL_FRAME;
   history.push({ duration });
-  return { episode, path, histogram, duration, from };
+
+  return {
+    episode,
+    path: statsPath,
+    histogram,
+    duration: duration + MAZE_ADDITIONAL_FRAME,
+    from,
+  };
 });
 
 const data = [

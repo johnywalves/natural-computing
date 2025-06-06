@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { TrainingComposition } from "./compositions/Training";
 import { pathShowMaze, SampleComposition } from "./compositions/Sample";
+import { SlidesComposition } from "./compositions/Slides";
 import Manifesto from "./paths/manifesto.json";
 import "./index.css";
 
@@ -25,7 +26,15 @@ export const RemotionRoot: React.FC = () => {
         id="Training"
         component={TrainingComposition}
         durationInFrames={trainingDuration}
-        fps={120}
+        fps={30}
+        width={1280}
+        height={960}
+      />
+      <Composition
+        id="Slides"
+        component={SlidesComposition}
+        durationInFrames={250}
+        fps={30}
         width={1280}
         height={960}
       />

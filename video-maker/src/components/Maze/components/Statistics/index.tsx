@@ -14,15 +14,20 @@ const Info = ({ label, value }: { label: string; value: number }) => (
 
 const Statistics = ({ episode, path, histogram }: StatisticsProps) => {
   const frame = useCurrentFrame();
-  const currentStep = Math.min(path.length, frame + 1);
-
-  const data = episode !== 1 ? [...histogram, { duration: currentStep }] : [];
+  const list = path.slice(0, frame + 1);
+  const currentIndex = Math.min(list.length - 1, frame);
+  const currentStep = list[currentIndex];
+  const data =
+    episode !== 1 ? [...histogram, { duration: currentStep.count }] : [];
 
   return (
     <div className="h-full flex flex-col justify-between">
       <div className="text-gray-100">
         <Info label="Episódio" value={episode} />
-        <Info label="Passos" value={currentStep} />
+        <Info label="Passos" value={currentStep.count} />
+        {list.length <= frame ? (
+          <Info label="Sucesso" value={currentStep.count} />
+        ) : null}
       </div>
 
       <LineChart width={300} height={500} data={data}>

@@ -1,5 +1,6 @@
 import { AbsoluteFill, Sequence } from "remotion";
 import Maze from "../../components/Maze";
+import { getStatsPath } from "../../utils/getStatsPath";
 
 const data = [
   0x0e, 0x0a, 0x0a, 0x08, 0x0a, 0x0a, 0x0a, 0x08, 0x0a, 0x0a, 0x08, 0x0a, 0x0a,
@@ -902,7 +903,7 @@ export const SampleComposition = () => {
   return (
     <Sequence durationInFrames={pathShowMaze.length + 10}>
       <AbsoluteFill className="bg-gray-800 flex flex-row items-center justify-center p-18 relative gap-12">
-        <Maze data={data} path={pathShowMaze} />
+        <Maze data={data} path={getStatsPath(pathShowMaze)} />
       </AbsoluteFill>
     </Sequence>
   );
