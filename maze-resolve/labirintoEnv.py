@@ -53,6 +53,7 @@ if (VERBOSE):
 class LabirintoEnv:
     def __init__(self):
         self.labirinto = labirinto
+        self.prev_estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
         self.estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
         self.n_acoes = 4  # Cima, Direita, Baixo, Esquerda
 
@@ -66,9 +67,16 @@ class LabirintoEnv:
     
     def apura_info(self):
         paredes = self.apura_paredes(self.estado[0], self.estado[1])
-        return np.array([(self.estado[0], self.estado[1], paredes[0], paredes[1], paredes[2], paredes[3])])
+        return np.array([(self.prev_estado[0], self.prev_estado[1],
+                           self.estado[0], self.estado[1], 
+                           paredes[0], paredes[1], paredes[2], paredes[3])])
+    
+    def atualiza_estado(self, novo_estado):
+        self.prev_estado = self.estado
+        self.estado = novo_estado
 
     def reset(self):
+        self.prev_estado = INITIAL_POSITION
         self.estado = INITIAL_POSITION
         return self.estado
     
@@ -118,10 +126,10 @@ class LabirintoEnv:
         if (0 <= novo_estado[0] < 16 and 0 <= novo_estado[1] < 16):
             resultado = self.avalia(action, novo_estado)
             if resultado == 0:  # Caminho livre
-                self.estado = novo_estado
+                self.atualiza_estado(novo_estado)
                 recompensa = -0.1
             elif resultado == 2:  # Objetivo
-                self.estado = novo_estado
+                self.atualiza_estado(novo_estado)
                 recompensa = 100
                 done = True
             else:  # Parede

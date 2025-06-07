@@ -8,7 +8,7 @@ from filePathTaken import FilePathTaken
 
 def criar_modelo():
     model = Sequential([
-        layers.Dense(128, input_dim=6, activation='relu'), # Entrada: (x, y, topo, direita, baixo, esquerda) 
+        layers.Dense(128, input_dim=8, activation='relu'), # Entrada: (prev_x, prev_y, x, y, topo, direita, baixo, esquerda) 
         layers.Dense(64, activation='relu'),
         layers.Dense(4, activation='linear'),  # Saída: Q-valor para cada ação
     ])
