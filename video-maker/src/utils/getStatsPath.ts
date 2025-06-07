@@ -1,10 +1,21 @@
 export const getStatsPath = (path: Array<Array<number>>) => {
   let count = 0;
+  let stopCount = 0;
+
   return path
-    .map((pos) => {
+    .map((pos, idx) => {
       const [x, y] = pos;
+
       count = count + 1;
-      return { x, y, count };
+
+      const hasPrev = idx !== 0;
+      const isStop =
+        hasPrev && path[idx - 1][0] === x && path[idx - 1][1] === y;
+      if (isStop) {
+        stopCount = stopCount + 1;
+      }
+
+      return { x, y, count, stopCount };
     })
     .filter((_, idx) => idx % 5 === 0);
 };

@@ -25,6 +25,7 @@ const Statistics = ({ episode, path, histogram }: StatisticsProps) => {
       <div className="text-gray-100">
         <Info label="Episódio" value={episode} />
         <Info label="Passos" value={currentStep.count} />
+        <Info label="Paradas" value={currentStep.stopCount} />
         {list.length <= frame ? (
           <Info label="Sucesso" value={currentStep.count} />
         ) : null}
