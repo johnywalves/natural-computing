@@ -2,14 +2,14 @@ import { Composition } from "remotion";
 import { TrainingComposition } from "./compositions/Training";
 import { pathShowMaze, SampleComposition } from "./compositions/Sample";
 import { SlidesComposition } from "./compositions/Slides";
+import { getStatsPath } from "./utils/getStatsPath";
 import Manifesto from "./paths/manifesto.json";
 import "./index.css";
 
 const fnSum = (acc: number, cur: number) => acc + cur;
-const trainingDuration = Manifesto.map(({ path }) => path.length).reduce(
-  fnSum,
-  0,
-);
+const trainingDuration = Manifesto.map(({ path }) => getStatsPath(path))
+  .map((path) => path.length)
+  .reduce(fnSum, 0);
 
 export const RemotionRoot: React.FC = () => {
   return (

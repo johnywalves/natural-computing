@@ -1,6 +1,7 @@
 import numpy as np
 
 VERBOSE = False
+INITIAL_POSITION = (0, 0)
 
 BINARY_MODEL_BORDER =  {
   0x00: [0, 0, 0, 0],
@@ -20,8 +21,6 @@ BINARY_MODEL_BORDER =  {
   0x0e: [0, 1, 1, 1],
   0x0f: [1, 1, 1, 1], 
 }
-
-INITIAL_POSITION = (0, 0)
 
 # 3path_test.c
 labirinto = np.array([
@@ -50,12 +49,13 @@ labirinto = np.array([
 if (VERBOSE):
     print(labirinto)
 
-class LabirintoEnv:
+class Environment:
     def __init__(self):
         self.labirinto = labirinto
-        self.prev_estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
-        self.estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
+        self.n_possibilidades = labirinto.shape[0] * labirinto.shape[1]
         self.n_acoes = 4  # Cima, Direita, Baixo, Esquerda
+
+        self.reset()
 
     def apura_paredes(self, x, y):
         code = labirinto[x, y]
@@ -64,22 +64,18 @@ class LabirintoEnv:
             print('code', code)
 
         return BINARY_MODEL_BORDER[code]
-    
-    def apura_info(self):
-        paredes = self.apura_paredes(self.estado[0], self.estado[1])
-        return np.array([(self.prev_estado[0], self.prev_estado[1],
-                           self.estado[0], self.estado[1], 
-                           paredes[0], paredes[1], paredes[2], paredes[3])])
-    
+
     def atualiza_estado(self, novo_estado):
+        self.index_estado = novo_estado[0] * 16 + novo_estado[1] 
         self.prev_estado = self.estado
         self.estado = novo_estado
 
     def reset(self):
-        self.prev_estado = INITIAL_POSITION
-        self.estado = INITIAL_POSITION
+        self.index_estado = 0
+        self.prev_estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
+        self.estado = INITIAL_POSITION  # Início no canto inferior esquerdo (0,0)
         return self.estado
-    
+
     def avalia(self, action, novo_estado):
         paredes = self.apura_paredes(self.estado[0], self.estado[1])
 
@@ -87,7 +83,7 @@ class LabirintoEnv:
         baixo = paredes[2] == 0 and action == 1 # Baixo
         esquerda = paredes[3] == 0 and action == 2 # Esquerda
         direita = paredes[1] == 0 and action == 3 # Direita
-        
+
         if (VERBOSE):
             print('paredes', paredes)
             print('cima', cima)
@@ -139,9 +135,4 @@ class LabirintoEnv:
             recompensa = -1
             done = False
 
-        return self.estado, recompensa, done
-
-if (VERBOSE):
-    env = LabirintoEnv()
-    env.reset()
-    print(env.passo(3)) # direita
+        return self.index_estado, self.estado, recompensa, done

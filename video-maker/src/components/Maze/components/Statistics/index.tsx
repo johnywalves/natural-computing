@@ -1,7 +1,7 @@
 import { useCurrentFrame } from "remotion";
 import { StatisticsProps } from "./types";
-import { CartesianGrid, Line, LineChart } from "recharts";
-import { LINE_STATISTICS } from "../../../../constants/colors";
+import { Line, LineChart } from "recharts";
+import { LINE_STATISTICS, LINE_STOPS } from "../../../../constants/colors";
 
 const Info = ({ label, value }: { label: string; value: number }) => (
   <div className="flex flex-row justify-between text-4xl">
@@ -31,15 +31,22 @@ const Statistics = ({ episode, path, histogram }: StatisticsProps) => {
         ) : null}
       </div>
 
-      <LineChart width={300} height={500} data={data}>
-        <CartesianGrid stroke="#eee" strokeDasharray="5" />
-        <Line
-          type="monotone"
-          dataKey="duration"
-          stroke={LINE_STATISTICS}
-          strokeWidth={5}
-        />
-      </LineChart>
+      <div className="border border-gray-300 border-dashed">
+        <LineChart width={300} height={500} data={data}>
+          <Line
+            type="monotone"
+            dataKey="duration"
+            stroke={LINE_STATISTICS}
+            strokeWidth={5}
+          />
+          <Line
+            type="monotone"
+            dataKey="stopCount"
+            stroke={LINE_STOPS}
+            strokeWidth={5}
+          />
+        </LineChart>
+      </div>
     </div>
   );
 };
