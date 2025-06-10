@@ -1,4 +1,4 @@
-export const getStatsPath = (path: Array<Array<number>>) => {
+export const getStatsPath = (path: Array<Array<number>>, skip: number = 1) => {
   let count = 0;
   let stopCount = 0;
 
@@ -17,5 +17,5 @@ export const getStatsPath = (path: Array<Array<number>>) => {
 
       return { x, y, count, stopCount };
     })
-    .filter((_, idx) => idx % 5 === 0);
+    .filter((_, idx) => idx % skip === 0);
 };

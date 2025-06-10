@@ -1,15 +1,22 @@
 import { Composition } from "remotion";
 import { TrainingComposition } from "./compositions/Training";
+import { SEQUENCES_SLIDE } from "./compositions/Slides/sequences";
 import { pathShowMaze, SampleComposition } from "./compositions/Sample";
 import { SlidesComposition } from "./compositions/Slides";
-import { getStatsPath } from "./utils/getStatsPath";
+import { MAZE_ADDITIONAL_FRAME } from "./constants/config";
 import Manifesto from "./paths/manifesto.json";
+import { getStatsPath } from "./utils/getStatsPath";
 import "./index.css";
 
 const fnSum = (acc: number, cur: number) => acc + cur;
-const trainingDuration = Manifesto.map(({ path }) => getStatsPath(path))
-  .map((path) => path.length)
+
+const trainingDuration = Manifesto.map(({ path }) => getStatsPath(path, 5))
+  .map((path) => path.length + MAZE_ADDITIONAL_FRAME)
   .reduce(fnSum, 0);
+
+const slidesDuration = SEQUENCES_SLIDE.map(
+  ({ durationInFrames }) => durationInFrames,
+).reduce(fnSum, 0);
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -33,7 +40,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Slides"
         component={SlidesComposition}
-        durationInFrames={250}
+        durationInFrames={slidesDuration}
         fps={30}
         width={1280}
         height={960}

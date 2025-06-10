@@ -1,6 +1,8 @@
+import { ANCHOR_STATES, AnchorPros } from "./types";
+
 const styleLine = { fillOpacity: "0", stroke: "black", strokeWidth: "0.5rem" };
 
-export const Anchor = () => (
+export const Anchor = ({ state = ANCHOR_STATES.TALKING }: AnchorPros) => (
   <div
     className="absolute overflow-hidden w-[25rem] h-[25rem]"
     style={{ bottom: "0", left: "-5%" }}
@@ -247,28 +249,41 @@ export const Anchor = () => (
             <clipPath id="tongue-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5">
               <circle cx="-60" cy="90" r="120"></circle>
             </clipPath>
-            <path
-              d="m229.92 483.88 0.43448-29.31c96.356 90.69 155.91 98.142 151.55 89.117-41.134-76.555-43.862-102.01 71.159-103.14 97.15-3.5485 70.575 38.622 47.117 85.789-7.9256 12.947 30.341-9.1565 81.368-62.434-96.38 184.5-303.2 120.2-351.63 19.976z"
-              transform="translate(-446, -469)"
-              style={{ fill: "rgba(54, 6, 6, 0.627)" }}
-            />
-            <path
-              id="mouth-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5"
-              d="m -60 0 a 5 5 0 0 0 120 0 a 5 1 0 0 0 -120 0"
-            />
-            <path
-              d="m -60 0 a 5 5 0 0 0 120 0 a 5 1 0 0 0 -120 0"
-              style={styleLine}
-            />
-            <use
-              clipPath="url(#tongue-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5)"
-              xlinkHref="#mouth-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5"
-              style={{
-                fill: "rgb(235, 127, 127)",
-                filter:
-                  'url("#tongue-shadow-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5")',
-              }}
-            ></use>
+
+            {state === ANCHOR_STATES.TALKING ? (
+              <>
+                <path
+                  d="m229.92 483.88 0.43448-29.31c96.356 90.69 155.91 98.142 151.55 89.117-41.134-76.555-43.862-102.01 71.159-103.14 97.15-3.5485 70.575 38.622 47.117 85.789-7.9256 12.947 30.341-9.1565 81.368-62.434-96.38 184.5-303.2 120.2-351.63 19.976z"
+                  transform="translate(-446, -469)"
+                  style={{ fill: "rgba(54, 6, 6, 0.40)" }}
+                />
+                <path
+                  id="mouth-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5"
+                  d="m -60 0 a 5 5 0 0 0 120 0 a 5 1 0 0 0 -120 0"
+                />
+                <path
+                  d="m -60 0 a 5 5 0 0 0 120 0 a 5 1 0 0 0 -120 0"
+                  style={styleLine}
+                />
+                <use
+                  clipPath="url(#tongue-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5)"
+                  xlinkHref="#mouth-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5"
+                  style={{
+                    fill: "rgb(235, 127, 127)",
+                    filter:
+                      'url("#tongue-shadow-0e53f54e-c9a1-45eb-bd5a-f26df72f77c5")',
+                  }}
+                />
+              </>
+            ) : null}
+
+            {state === ANCHOR_STATES.LISTENING ? (
+              <path
+                d="M 229.92 483.88 L 230.3545 454.57 C 326.7105 545.26 386.2645 552.712 381.9045 543.687 C 371 525 378 487 442 487 C 505 488 512 498 500.1805 526.336 C 495 537 530.5215 517.1795 581.5485 463.902 C 485.1685 648.402 278.3485 584.102 229.9185 483.878 Z"
+                transform="translate(-446, -469)"
+                style={{ fill: "rgba(54, 6, 6, 0.40)" }}
+              />
+            ) : null}
           </g>
         </g>
         <g transform="translate(400, 875) rotate(0 400 875)">

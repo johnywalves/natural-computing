@@ -10,10 +10,10 @@ taken = FilePathTaken()
 q_table = np.zeros([env.n_possibilidades, env.n_acoes])
 
 # Parâmetros de treinamento
-epsilon = 1.0   # Exploração inicial
+epsilon = 1.0    # Exploração inicial
 alpha = 0.1
-gamma = 0.95    # Fator de desconto
-episodes = 100  # Quantidade total de ciclos
+gamma = 0.95     # Fator de desconto
+episodes = 1000  # Quantidade total de ciclos
 
 # Escrever arquivo do caminho
 for episodio in range(episodes):
