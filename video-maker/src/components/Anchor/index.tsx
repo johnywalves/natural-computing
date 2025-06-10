@@ -5,7 +5,7 @@ const styleLine = { fillOpacity: "0", stroke: "black", strokeWidth: "0.5rem" };
 export const Anchor = ({ state = ANCHOR_STATES.TALKING }: AnchorPros) => (
   <div
     className="absolute overflow-hidden w-[25rem] h-[25rem]"
-    style={{ bottom: "0", left: "-5%" }}
+    style={{ bottom: "0", left: "-2%" }}
   >
     <svg viewBox="0 0 800 1300" className="sc-iQQCXo cwSvFG">
       <defs>

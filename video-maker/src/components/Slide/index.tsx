@@ -14,16 +14,16 @@ export const Chapter = ({
   text: string;
   subtitle?: string;
 }) => (
-  <div className="flex flex-col gap-24">
+  <div className="flex flex-col gap-10">
     <h1
-      className="text-9xl font-semibold item self-start"
+      className="text-[19vh] font-semibold item self-start"
       style={textNeonStyle(TEXT_SLIDE)}
     >
       {text}
     </h1>
 
     {subtitle ? (
-      <p className="text-4xl self-end" style={textNeonStyle(TEXT_SLIDE)}>
+      <p className="text-5xl self-end" style={textNeonStyle(TEXT_SLIDE)}>
         {subtitle}
       </p>
     ) : null}

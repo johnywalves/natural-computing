@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
 import { Img, staticFile } from "remotion";
-import { Chapter, DarkSlide, LightSlide } from "../../components/Slide";
+import { Chapter, DarkSlide } from "../../components/Slide";
 import { Anchor } from "../../components/Anchor";
+import Maze from "../../components/Maze";
 import { LastMazeSequence } from "./components/LastMaze";
+import { RewardsSequence } from "./components/Rewards";
+import { TRAINING_MAZE } from "../../utils/maze";
 import { SeqProps } from "./types";
+import { MicroMouseSequence } from "./components/MicroMouse";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -13,27 +17,28 @@ export const SEQUENCES_SLIDE: Array<{
     durationInFrames: 20,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
-        <Chapter text="Aprendizado por Reforço" />
-      </DarkSlide>
-    ),
-  },
-  {
-    durationInFrames: 20,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
         <Chapter text="Aprendizado por Reforço" subtitle="por Johny W. Alves" />
-        <Anchor />
       </DarkSlide>
     ),
   },
   {
     durationInFrames: 50,
     Component: (props: SeqProps) => (
-      <LightSlide {...props}>
-        <Img src={staticFile("renata.jpg")} alt="" className="w-5xl" />
+      <DarkSlide {...props}>
+        <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
         <Anchor />
-      </LightSlide>
+      </DarkSlide>
     ),
   },
+  MicroMouseSequence,
+  {
+    durationInFrames: 60,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        <Maze data={TRAINING_MAZE} path={[]} />
+      </DarkSlide>
+    ),
+  },
+  RewardsSequence,
   LastMazeSequence,
 ];

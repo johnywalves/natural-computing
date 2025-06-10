@@ -26,24 +26,24 @@ export const RemotionRoot: React.FC = () => {
         component={SampleComposition}
         durationInFrames={pathShowMaze.length + 10}
         fps={30}
-        width={1280}
-        height={960}
+        width={1920}
+        height={1080}
       />
       <Composition
         id="Training"
         component={TrainingComposition}
         durationInFrames={trainingDuration}
         fps={30}
-        width={1280}
-        height={960}
+        width={1920}
+        height={1080}
       />
       <Composition
         id="Slides"
         component={SlidesComposition}
         durationInFrames={slidesDuration}
         fps={30}
-        width={1280}
-        height={960}
+        width={1920}
+        height={1080}
       />
     </>
   );

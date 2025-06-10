@@ -39,8 +39,6 @@ for episodio in range(episodes):
         
         novo_valor = (1 - alpha) * antigo_valor + alpha * (recompensa + gamma * novo_max)
         q_table[index_antigo, action] = novo_valor
-
-        estado = novo_estado
         
     # Decaimento do epsilon
     epsilon = max(0.01, epsilon * 0.995)
