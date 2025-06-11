@@ -8,22 +8,29 @@ import Mouse from "../../../../components/Mouse";
 const Criteria = ({
   points,
   title,
+  activeIn,
   children,
 }: {
   points: string;
   title: string;
+  activeIn: number;
   children: ReactNode;
-}) => (
-  <div className="grid gap-10" style={{ gridTemplateColumns: "1fr 2fr" }}>
-    {children}
-    <div className="flex flex-col gap-5 justify-center items-center text-gray-100">
-      <p className="text-7xl font-bold">
-        {points} ponto{Math.abs(Number(points)) !== 1 ? "s" : ""}
-      </p>
-      <p className="text-4xl font-light">{title}</p>
+}) => {
+  return (
+    <div
+      className="animate-visibility grid gap-10 opacity-0"
+      style={{ animationDelay: `${activeIn}s`, gridTemplateColumns: "1fr 2fr" }}
+    >
+      {children}
+      <div className="flex flex-col gap-5 justify-center items-center text-gray-100">
+        <p className="text-7xl font-bold">
+          {points} ponto{Math.abs(Number(points)) !== 1 ? "s" : ""}
+        </p>
+        <p className="text-4xl font-light">{title}</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Wall = () => (
   <div className="h-full w-3">
@@ -31,7 +38,7 @@ const Wall = () => (
   </div>
 );
 
-const Line = ({ className }: { className?: string }) => (
+const Line = ({ className = "" }: { className?: string }) => (
   <div className={`h-3 ${className}`}>
     <Neon />
   </div>
@@ -77,8 +84,8 @@ const Crash = () => (
 );
 
 const Pass = () => (
-  <div className="flex flex-row justify-between w-[15rem] h-[15rem] pl-6 py-6">
-    <div className="grid h-full w-12 overflow-hidden">
+  <div className="flex flex-row justify-between w-[15rem] h-[15rem] pl-3 py-6">
+    <div className="grid h-full w-[4.5rem] overflow-hidden">
       <Movement className="items-end" delay={1.32}>
         <Neon style={{ width: "0.75rem" }} />
       </Movement>
@@ -97,7 +104,7 @@ const Pass = () => (
       <MouseContent className="animate-pass" />
     </div>
 
-    <div className="grid h-full w-12 overflow-hidden">
+    <div className="grid h-full w-[4.5rem] overflow-hidden">
       <Movement className="animate-run justify-end" delay={1.32}>
         <Neon style={{ height: "0.75rem" }} />
         <Neon style={{ height: "50%", width: "0.75rem" }} />
@@ -116,7 +123,7 @@ const Pass = () => (
 );
 
 const Finish = () => (
-  <div className="relative flex flex-col justify-between w-[16rem] h-[16rem] p-6">
+  <div className="overflow-hidden relative flex flex-col justify-between w-[16rem] h-[16rem] p-6">
     <Line className="w-[50%]" />
     <div className="h-[12rem] flex flex-row justify-between">
       <Wall />
@@ -132,15 +139,15 @@ const Component = (props: SeqProps) => {
   return (
     <DarkSlide {...props}>
       <div className="flex flex-col gap-12">
-        <Criteria points="-1" title="Bater na parede">
+        <Criteria points="-1" title="Bater na parede" activeIn={0}>
           <Crash />
         </Criteria>
 
-        <Criteria points="-0.1" title="Mover caminho livre">
+        <Criteria points="-0.1" title="Mover caminho livre" activeIn={3}>
           <Pass />
         </Criteria>
 
-        <Criteria points="+100" title="Chegar ao centro">
+        <Criteria points="+100" title="Chegar ao centro" activeIn={6}>
           <Finish />
         </Criteria>
       </div>
@@ -150,6 +157,6 @@ const Component = (props: SeqProps) => {
 };
 
 export const RewardsSequence = {
-  durationInFrames: 60,
+  durationInFrames: 270,
   Component,
 };

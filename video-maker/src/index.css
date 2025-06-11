@@ -43,16 +43,30 @@
 
 @keyframes finish {
   0% {
-    transform: translate(0, -200%);
+    transform: translate(25%, -300%);
   }
-  20% {
-    transform: translate(0, -50%);
+  60% {
+    transform: translate(25%, -50%);
   }
   80% {
-    transform: translate(calc(-50% + 1.25rem), -50%);
+    transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate(-50%, -50%);
+  }
+  85% {
+    transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate(-50%, calc(-50% - 1rem));
   }
   100% {
     transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes visibility {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -74,5 +88,6 @@ animation-delay: calc({(1 - $i)/$n} * duration)}
   --animate-crash: crash 1.5s ease-in-out infinite;
   --animate-pass: pass 2s linear infinite;
   --animate-run: run 2s linear infinite;
-  --animate-finish: run 2s linear infinite;
+  --animate-finish: finish 2s linear infinite;
+  --animate-visibility: visibility 0.5s linear forwards;
 }

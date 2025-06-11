@@ -8,6 +8,7 @@ import { RewardsSequence } from "./components/Rewards";
 import { TRAINING_MAZE } from "../../utils/maze";
 import { SeqProps } from "./types";
 import { MicroMouseSequence } from "./components/MicroMouse";
+import { LoopSequence } from "./components/Loop";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -39,6 +40,7 @@ export const SEQUENCES_SLIDE: Array<{
       </DarkSlide>
     ),
   },
+  LoopSequence,
   RewardsSequence,
   LastMazeSequence,
 ];
