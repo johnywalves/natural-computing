@@ -14,16 +14,16 @@ export const Chapter = ({
   text: string;
   subtitle?: string;
 }) => (
-  <div className="flex flex-col gap-10">
+  <div className="flex flex-col gap-10 p-15">
     <h1
-      className="text-[19vh] font-semibold item self-start"
+      className="text-[19vh] text-center font-semibold item self-start"
       style={textNeonStyle(TEXT_SLIDE)}
     >
       {text}
     </h1>
 
     {subtitle ? (
-      <p className="text-5xl self-end" style={textNeonStyle(TEXT_SLIDE)}>
+      <p className="text-6xl self-end" style={textNeonStyle(TEXT_SLIDE)}>
         {subtitle}
       </p>
     ) : null}
@@ -36,19 +36,7 @@ export const DarkSlide = ({
 }: SequenceProps &
   React.RefAttributes<HTMLDivElement> & { children?: ReactNode }) => (
   <Sequence {...rest}>
-    <AbsoluteFill className="bg-gray-800 flex flex-row items-center justify-center p-18 relative gap-12">
-      {children}
-    </AbsoluteFill>
-  </Sequence>
-);
-
-export const LightSlide = ({
-  children,
-  ...rest
-}: SequenceProps &
-  React.RefAttributes<HTMLDivElement> & { children?: ReactNode }) => (
-  <Sequence {...rest}>
-    <AbsoluteFill className="bg-amber-200 flex flex-row items-center justify-center p-18 relative gap-12">
+    <AbsoluteFill className="bg-gray-800 flex flex-row items-center justify-center p-18 gap-12">
       {children}
     </AbsoluteFill>
   </Sequence>
