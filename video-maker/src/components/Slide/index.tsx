@@ -1,6 +1,6 @@
 import { AbsoluteFill, Sequence, SequenceProps } from "remotion";
 import { TEXT_SLIDE } from "../../constants/colors";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 const textNeonStyle = (color: string) => ({
   color,
@@ -32,11 +32,18 @@ export const Chapter = ({
 
 export const DarkSlide = ({
   children,
+  style,
   ...rest
 }: SequenceProps &
-  React.RefAttributes<HTMLDivElement> & { children?: ReactNode }) => (
+  React.RefAttributes<HTMLDivElement> & {
+    style?: CSSProperties;
+    children?: ReactNode;
+  }) => (
   <Sequence {...rest}>
-    <AbsoluteFill className="bg-gray-800 flex flex-row items-center justify-center p-18 gap-12">
+    <AbsoluteFill
+      className="bg-gray-800 flex flex-row items-center justify-center p-18 gap-12"
+      style={style}
+    >
       {children}
     </AbsoluteFill>
   </Sequence>

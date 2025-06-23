@@ -89,5 +89,4 @@ animation-delay: calc({(1 - $i)/$n} * duration)}
   --animate-pass: pass 2s linear infinite;
   --animate-run: run 2s linear infinite;
   --animate-finish: finish 2s linear infinite;
-  --animate-visibility: visibility 0.5s linear forwards;
 }

@@ -4,22 +4,23 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import Neon from "../../../../components/Neon";
 import Mouse from "../../../../components/Mouse";
+import { useCurrentFrame } from "remotion";
 
 const Criteria = ({
   points,
   title,
-  activeIn,
+  opacity,
   children,
 }: {
   points: string;
   title: string;
-  activeIn: number;
+  opacity: number;
   children: ReactNode;
 }) => {
   return (
     <div
-      className="animate-visibility grid gap-10 opacity-0"
-      style={{ animationDelay: `${activeIn}s`, gridTemplateColumns: "1fr 2fr" }}
+      className="grid gap-10"
+      style={{ gridTemplateColumns: "1fr 2fr", opacity }}
     >
       {children}
       <div className="flex flex-col gap-5 justify-center items-center text-gray-100">
@@ -136,18 +137,29 @@ const Finish = () => (
 );
 
 const Component = (props: SeqProps) => {
+  const frame = useCurrentFrame();
+  const relativeFrame = frame - (props.from ?? 0);
+
   return (
     <DarkSlide {...props}>
       <div className="flex flex-col gap-12">
-        <Criteria points="-1" title="Bater na parede" activeIn={0}>
+        <Criteria points="-1" title="Bater na parede" opacity={1}>
           <Crash />
         </Criteria>
 
-        <Criteria points="-0.1" title="Mover caminho livre" activeIn={3}>
+        <Criteria
+          points="-0.1"
+          title="Mover caminho livre"
+          opacity={relativeFrame > 120 ? 1 : 0}
+        >
           <Pass />
         </Criteria>
 
-        <Criteria points="+100" title="Chegar ao centro" activeIn={6}>
+        <Criteria
+          points="+100"
+          title="Chegar ao centro"
+          opacity={relativeFrame > 240 ? 1 : 0}
+        >
           <Finish />
         </Criteria>
       </div>
@@ -157,6 +169,6 @@ const Component = (props: SeqProps) => {
 };
 
 export const RewardsSequence = {
-  durationInFrames: 270,
+  durationInFrames: 360,
   Component,
 };

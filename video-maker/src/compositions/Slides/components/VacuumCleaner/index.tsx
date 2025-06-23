@@ -1,6 +1,7 @@
 import { DarkSlide } from "../../../../components/Slide";
 import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
+import { Source } from "../../../../components/Source";
 import { OffthreadVideo, staticFile } from "remotion";
 
 const START_TIME = 280;
@@ -15,6 +16,7 @@ const Component = (props: SeqProps) => (
       src={staticFile("vacuum_cleaner.mp4")}
     />
     <Anchor />
+    <Source text="https://www.tiktok.com/@stanleythestanman/video/7314441663605230879" />
   </DarkSlide>
 );
 

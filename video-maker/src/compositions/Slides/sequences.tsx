@@ -2,15 +2,16 @@ import { ReactNode } from "react";
 import { Img, staticFile } from "remotion";
 import { Chapter, DarkSlide } from "../../components/Slide";
 import { Anchor } from "../../components/Anchor";
-import Maze from "../../components/Maze";
 import { FirstMazeSequence } from "./components/FirstMaze";
 import { LastMazeSequence } from "./components/LastMaze";
 import { RewardsSequence } from "./components/Rewards";
-import { TRAINING_MAZE } from "../../utils/maze";
 import { SeqProps } from "./types";
 import { MicroMouseSequence } from "./components/MicroMouse";
 import { LoopSequence } from "./components/Loop";
 import { VacuumCleaner } from "./components/VacuumCleaner";
+import { ChallengeSequence } from "./components/Challenge";
+import { EnvironmentSequence } from "./components/Environment";
+import { DirectionSequence } from "./components/Direction";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -26,6 +27,7 @@ export const SEQUENCES_SLIDE: Array<{
     ),
   },
   MicroMouseSequence,
+  ChallengeSequence,
   FirstMazeSequence,
   {
     durationInFrames: 50,
@@ -49,14 +51,7 @@ export const SEQUENCES_SLIDE: Array<{
   LoopSequence(),
   LoopSequence("environment"),
   VacuumCleaner,
-  {
-    durationInFrames: 60,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
-        <Maze data={TRAINING_MAZE} path={[]} />
-      </DarkSlide>
-    ),
-  },
+  EnvironmentSequence,
   LoopSequence("action"),
   {
     durationInFrames: 50,
@@ -67,9 +62,10 @@ export const SEQUENCES_SLIDE: Array<{
       </DarkSlide>
     ),
   },
+  DirectionSequence,
   LoopSequence("state"),
   LoopSequence("reward"),
-  LoopSequence("agent"),
   RewardsSequence,
+  LoopSequence("agent"),
   LastMazeSequence,
 ];

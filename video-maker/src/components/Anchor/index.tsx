@@ -208,12 +208,7 @@ export const Anchor = ({ state = ANCHOR_STATES.TALKING }: AnchorPros) => (
                 ry="32"
                 style={{ fill: "rgb(0, 0, 0)" }}
               />
-              <circle
-                cx="10"
-                cy="-16"
-                r="8"
-                style={{ fill: "white;" }}
-              ></circle>
+              <circle cx="10" cy="-16" r="8" style={{ fill: "white" }} />
               <path
                 d="m 24 -40 a 7 -2 0 0 0 -55 0 a 7 1 0 0 0 55 0"
                 transform="translate(0, 0) rotate(6 24 -40) "
