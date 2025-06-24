@@ -1,6 +1,4 @@
-import { DarkSlide } from "../../../../components/Slide";
 import { Anchor } from "../../../../components/Anchor";
-import { SeqProps } from "../../../../compositions/Slides/types";
 import { TRAINING_MAZE } from "../../../../utils/maze";
 import Maze from "../../../../components/Maze";
 import { Img, staticFile } from "remotion";
@@ -17,7 +15,7 @@ const Label = ({ children }: { children: ReactNode }) => (
   </p>
 );
 
-const getComponent = (stepRL?: TypeStepRL) => (props: SeqProps) => {
+export const getLoopSequence = (stepRL?: TypeStepRL) => {
   const getOpacity = (currentStep: TypeStepRL) =>
     ({
       opacity: !stepRL || stepRL === currentStep ? 1 : 0.25,
@@ -25,7 +23,7 @@ const getComponent = (stepRL?: TypeStepRL) => (props: SeqProps) => {
     }) as CSSProperties;
 
   return (
-    <DarkSlide {...props}>
+    <>
       <div
         className="relative w-[38rem] h-[38rem]"
         style={getOpacity("environment")}
@@ -63,11 +61,6 @@ const getComponent = (stepRL?: TypeStepRL) => (props: SeqProps) => {
       </div>
 
       <Anchor />
-    </DarkSlide>
+    </>
   );
 };
-
-export const LoopSequence = (currentStep?: TypeStepRL) => ({
-  durationInFrames: 270,
-  Component: getComponent(currentStep),
-});

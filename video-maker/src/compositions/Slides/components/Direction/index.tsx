@@ -1,7 +1,7 @@
 import { DarkSlide } from "../../../../components/Slide";
 import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
-import { useCurrentFrame } from "remotion";
+import { Audio, staticFile, useCurrentFrame } from "remotion";
 import { ReactNode } from "react";
 
 const WrapperItem = ({
@@ -47,11 +47,12 @@ const Component = (props: SeqProps) => {
         </WrapperItem>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/directions.opus")} />
     </DarkSlide>
   );
 };
 
 export const DirectionSequence = {
-  durationInFrames: 120,
+  durationInFrames: 270,
   Component,
 };

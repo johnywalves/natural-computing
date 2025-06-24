@@ -15,13 +15,13 @@ const Component = (props: SeqProps) => {
         muted
       />
       <Anchor />
-      <Audio src={staticFile("audio/micro_mouse.mp3")} />
+      <Audio src={staticFile("audio/micro_mouse.opus")} />
       <Source text="https://www.youtube.com/watch?v=CLwICJKV4dw&t=21s&ab_channel=JUING-HUEI" />
     </DarkSlide>
   );
 };
 
 export const ChallengeSequence = {
-  durationInFrames: 230,
+  durationInFrames: 320,
   Component,
 };

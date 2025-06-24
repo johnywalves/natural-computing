@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Img, staticFile } from "remotion";
+import { Audio, Img, staticFile } from "remotion";
 import { Chapter, DarkSlide } from "../../components/Slide";
 import { Anchor } from "../../components/Anchor";
 import { FirstMazeSequence } from "./components/FirstMaze";
@@ -7,7 +7,7 @@ import { LastMazeSequence } from "./components/LastMaze";
 import { RewardsSequence } from "./components/Rewards";
 import { SeqProps } from "./types";
 import { MicroMouseSequence } from "./components/MicroMouse";
-import { LoopSequence } from "./components/Loop";
+import { getLoopSequence } from "./components/Loop";
 import { VacuumCleaner } from "./components/VacuumCleaner";
 import { ChallengeSequence } from "./components/Challenge";
 import { EnvironmentSequence } from "./components/Environment";
@@ -18,11 +18,20 @@ export const SEQUENCES_SLIDE: Array<{
   Component: (props: SeqProps) => ReactNode;
 }> = [
   {
-    durationInFrames: 50,
+    durationInFrames: 30,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
+      </DarkSlide>
+    ),
+  },
+  {
+    durationInFrames: 220,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
         <Anchor />
+        <Audio src={staticFile("audio/renata.opus")} />
       </DarkSlide>
     ),
   },
@@ -30,42 +39,94 @@ export const SEQUENCES_SLIDE: Array<{
   ChallengeSequence,
   FirstMazeSequence,
   {
-    durationInFrames: 50,
+    durationInFrames: 320,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         <Img src={staticFile("bulb.svg")} alt="" className="w-full" />
         <Chapter text="Aprendizado por Reforço" />
         <Anchor />
+        <Audio src={staticFile("audio/rl.opus")} />
       </DarkSlide>
     ),
   },
   {
-    durationInFrames: 50,
+    durationInFrames: 360,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         <Img src={staticFile("johnywalves.jpg")} alt="" className="w-full" />
         <Anchor />
+        <Audio src={staticFile("audio/johny.opus")} />
       </DarkSlide>
     ),
   },
-  LoopSequence(),
-  LoopSequence("environment"),
-  VacuumCleaner,
-  EnvironmentSequence,
-  LoopSequence("action"),
+  {
+    durationInFrames: 530,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        {getLoopSequence()}
+        <Audio src={staticFile("audio/markov.opus")} />
+      </DarkSlide>
+    ),
+  },
   {
     durationInFrames: 50,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>{getLoopSequence("environment")}</DarkSlide>
+    ),
+  },
+  VacuumCleaner,
+  EnvironmentSequence,
+  {
+    durationInFrames: 165,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        {getLoopSequence("action")}
+        <Audio src={staticFile("audio/actions.opus")} />
+      </DarkSlide>
+    ),
+  },
+  {
+    durationInFrames: 140,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         <Img src={staticFile("go_board.png")} alt="" className="h-full" />
         <Anchor />
+        <Audio src={staticFile("audio/go.opus")} />
+      </DarkSlide>
+    ),
+  },
+  {
+    durationInFrames: 170,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        <Img src={staticFile("nes.png")} alt="" className="h-full" />
+        <Anchor />
+        <Audio src={staticFile("audio/nes.opus")} />
       </DarkSlide>
     ),
   },
   DirectionSequence,
-  LoopSequence("state"),
-  LoopSequence("reward"),
+  {
+    durationInFrames: 310,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>
+        {getLoopSequence("state")}
+        <Audio src={staticFile("audio/state.opus")} />
+      </DarkSlide>
+    ),
+  },
+  {
+    durationInFrames: 50,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>{getLoopSequence("reward")}</DarkSlide>
+    ),
+  },
   RewardsSequence,
-  LoopSequence("agent"),
+  {
+    durationInFrames: 50,
+    Component: (props: SeqProps) => (
+      <DarkSlide {...props}>{getLoopSequence("agent")}</DarkSlide>
+    ),
+  },
   LastMazeSequence,
 ];
