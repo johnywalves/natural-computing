@@ -15,7 +15,7 @@ const WrapperItem = ({
 }) => {
   return (
     <div
-      className="w-72 h-72 bg-red-600"
+      className="w-72 h-72 flex items-center justify-center"
       style={{ opacity: relativeFrame > moment ? 1 : 0 }}
     >
       {children}
@@ -28,22 +28,22 @@ const Component = (props: SeqProps) => {
   const relativeFrame = frame - (props.from ?? 0);
 
   return (
-    <DarkSlide {...props}>
-      <div className="grid grid-cols-2 gap-24">
+    <DarkSlide name="Directions" {...props}>
+      <div className="grid grid-cols-2 gap-32">
         <WrapperItem relativeFrame={relativeFrame} moment={0}>
-          <></>
+          <div className="arrow" />
         </WrapperItem>
 
         <WrapperItem relativeFrame={relativeFrame} moment={30}>
-          <></>
+          <div className="arrow south" />
         </WrapperItem>
 
         <WrapperItem relativeFrame={relativeFrame} moment={60}>
-          <></>
+          <div className="arrow east" />
         </WrapperItem>
 
         <WrapperItem relativeFrame={relativeFrame} moment={90}>
-          <></>
+          <div className="arrow west" />
         </WrapperItem>
       </div>
       <Anchor />

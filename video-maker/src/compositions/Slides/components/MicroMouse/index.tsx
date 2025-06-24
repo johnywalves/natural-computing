@@ -7,11 +7,12 @@ export const MICRO_MOUSE_START_TIME = 280;
 export const MICRO_MOUSE_FINISH_TIME = 600;
 
 const Component = (props: SeqProps) => (
-  <DarkSlide {...props}>
+  <DarkSlide name="Micro Mouse" {...props}>
     <OffthreadVideo
       className="h-[95%]"
       startFrom={MICRO_MOUSE_START_TIME}
       endAt={MICRO_MOUSE_FINISH_TIME}
+      volume={0.25}
       src={staticFile("micro_mouse.mp4")}
     />
     <Source text="https://www.youtube.com/watch?v=CLwICJKV4dw&t=21s&ab_channel=JUING-HUEI" />

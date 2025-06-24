@@ -13,7 +13,7 @@ const Component = (props: SeqProps) => {
   const frame = useCurrentFrame();
 
   return (
-    <DarkSlide {...props}>
+    <DarkSlide name="Maze Last" {...props}>
       <Maze data={TRAINING_MAZE} path={LAST_EPISODE.path} />
       {frame - (props.from ?? 0) > 50 ? <Anchor /> : null}
     </DarkSlide>

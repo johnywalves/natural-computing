@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Audio, Img, staticFile } from "remotion";
-import { Chapter, DarkSlide } from "../../components/Slide";
+import { DarkSlide } from "../../components/Slide";
 import { Anchor } from "../../components/Anchor";
-import { FirstMazeSequence } from "./components/FirstMaze";
+import { MazeFirstSequence } from "./components/MazeFirst";
 import { LastMazeSequence } from "./components/LastMaze";
 import { RewardsSequence } from "./components/Rewards";
 import { SeqProps } from "./types";
@@ -10,8 +10,20 @@ import { MicroMouseSequence } from "./components/MicroMouse";
 import { getLoopSequence } from "./components/Loop";
 import { VacuumCleaner } from "./components/VacuumCleaner";
 import { ChallengeSequence } from "./components/Challenge";
-import { EnvironmentSequence } from "./components/Environment";
 import { DirectionSequence } from "./components/Direction";
+import { NESSequence } from "./components/NES";
+import { RLSequence } from "./components/RL";
+import { MazeThirtySequence } from "./components/MazeThirty";
+import { BostonDynamicsSequence } from "./components/BostonDynamics";
+import { EnvironmentSequence } from "./components/Environment";
+import { MazeStateSequence } from "./components/MazeState";
+import { LearnWalkSequence } from "./components/LearnWalk";
+import { QTableSequence } from "./components/QTable";
+import { BookSequence } from "./components/Book";
+import { ReferencesSequence } from "./components/References";
+import { ThanksSequence } from "./components/Thanks";
+import { JohnySequence } from "./components/Johny";
+import { GOSequence } from "./components/GO";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -20,7 +32,7 @@ export const SEQUENCES_SLIDE: Array<{
   {
     durationInFrames: 30,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
+      <DarkSlide name="Opening" {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
       </DarkSlide>
     ),
@@ -28,7 +40,7 @@ export const SEQUENCES_SLIDE: Array<{
   {
     durationInFrames: 220,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
+      <DarkSlide name="Renata" {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
         <Anchor />
         <Audio src={staticFile("audio/renata.opus")} />
@@ -37,28 +49,9 @@ export const SEQUENCES_SLIDE: Array<{
   },
   MicroMouseSequence,
   ChallengeSequence,
-  FirstMazeSequence,
-  {
-    durationInFrames: 320,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
-        <Img src={staticFile("bulb.svg")} alt="" className="w-full" />
-        <Chapter text="Aprendizado por Reforço" />
-        <Anchor />
-        <Audio src={staticFile("audio/rl.opus")} />
-      </DarkSlide>
-    ),
-  },
-  {
-    durationInFrames: 360,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
-        <Img src={staticFile("johnywalves.jpg")} alt="" className="w-full" />
-        <Anchor />
-        <Audio src={staticFile("audio/johny.opus")} />
-      </DarkSlide>
-    ),
-  },
+  MazeFirstSequence,
+  RLSequence,
+  JohnySequence,
   {
     durationInFrames: 530,
     Component: (props: SeqProps) => (
@@ -69,13 +62,14 @@ export const SEQUENCES_SLIDE: Array<{
     ),
   },
   {
-    durationInFrames: 50,
+    durationInFrames: 300,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>{getLoopSequence("environment")}</DarkSlide>
     ),
   },
   VacuumCleaner,
   EnvironmentSequence,
+  MazeThirtySequence,
   {
     durationInFrames: 165,
     Component: (props: SeqProps) => (
@@ -85,26 +79,8 @@ export const SEQUENCES_SLIDE: Array<{
       </DarkSlide>
     ),
   },
-  {
-    durationInFrames: 140,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
-        <Img src={staticFile("go_board.png")} alt="" className="h-full" />
-        <Anchor />
-        <Audio src={staticFile("audio/go.opus")} />
-      </DarkSlide>
-    ),
-  },
-  {
-    durationInFrames: 170,
-    Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
-        <Img src={staticFile("nes.png")} alt="" className="h-full" />
-        <Anchor />
-        <Audio src={staticFile("audio/nes.opus")} />
-      </DarkSlide>
-    ),
-  },
+  GOSequence,
+  NESSequence,
   DirectionSequence,
   {
     durationInFrames: 310,
@@ -115,18 +91,25 @@ export const SEQUENCES_SLIDE: Array<{
       </DarkSlide>
     ),
   },
+  LearnWalkSequence,
+  BostonDynamicsSequence,
+  MazeStateSequence,
   {
-    durationInFrames: 50,
+    durationInFrames: 300,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>{getLoopSequence("reward")}</DarkSlide>
     ),
   },
   RewardsSequence,
   {
-    durationInFrames: 50,
+    durationInFrames: 300,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>{getLoopSequence("agent")}</DarkSlide>
     ),
   },
+  QTableSequence,
   LastMazeSequence,
+  BookSequence,
+  ReferencesSequence,
+  ThanksSequence,
 ];

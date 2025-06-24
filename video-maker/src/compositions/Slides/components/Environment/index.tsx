@@ -11,7 +11,7 @@ const Component = (props: SeqProps) => {
   const relativeFrame = frame - (props.from ?? 0);
 
   return (
-    <DarkSlide {...props}>
+    <DarkSlide name="Environment" {...props}>
       <Maze data={TRAINING_MAZE} path={[]} />
       <Anchor />
       {relativeFrame > 150 ? <Highlight x="24%" y="84%" /> : null}

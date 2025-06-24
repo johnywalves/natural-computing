@@ -17,8 +17,9 @@ const Statistics = ({ episode, path, histogram }: StatisticsProps) => {
   const list = path.slice(0, frame + 1);
   const currentIndex = Math.min(list.length - 1, frame);
   const currentStep = list[currentIndex];
-  const data =
-    episode !== 1 ? [...histogram, { duration: currentStep.count }] : [];
+  const data = episode !== 1 ? [...histogram] : [];
+
+  // episode !== 1 ? [...histogram, { duration: currentStep.count }] : [];
 
   return (
     <div className="h-full flex flex-col justify-between">

@@ -7,7 +7,7 @@ import { MICRO_MOUSE_FINISH_TIME } from "../MicroMouse";
 
 const Component = (props: SeqProps) => {
   return (
-    <DarkSlide {...props}>
+    <DarkSlide name="Challenge" {...props}>
       <OffthreadVideo
         className="h-[95%]"
         startFrom={MICRO_MOUSE_FINISH_TIME}

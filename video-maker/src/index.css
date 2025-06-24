@@ -84,6 +84,51 @@ animation-delay: calc({(1 - $i)/$n} * duration)}
   }
 }
 
+.arrow {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 75px;
+  margin: 0 25px;
+  border-radius: 9999px;
+  background-color: #e0138c;
+  filter: drop-shadow(0 0 32px #e0138c);
+  transform: scale(3);
+
+  &.south {
+    transform: scale(3) rotate(180deg);
+  }
+
+  &.east {
+    transform: scale(3) rotate(90deg);
+  }
+
+  &.west {
+    transform: scale(3) rotate(-90deg);
+  }
+}
+
+.arrow::before,
+.arrow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(50% - 6px);
+  width: 12px;
+  height: 45px;
+  border-radius: 9999px;
+  background-color: #e0138c;
+  transform-origin: 50% 6px;
+}
+
+.arrow::before {
+  transform: rotate(45deg);
+}
+
+.arrow::after {
+  transform: rotate(-45deg);
+}
+
 @theme {
   --animate-crash: crash 1.5s ease-in-out infinite;
   --animate-pass: pass 2s linear infinite;
