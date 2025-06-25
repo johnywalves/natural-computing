@@ -24,6 +24,8 @@ import { ReferencesSequence } from "./components/References";
 import { ThanksSequence } from "./components/Thanks";
 import { JohnySequence } from "./components/Johny";
 import { GOSequence } from "./components/GO";
+import { EquationSequence } from "./components/Equation";
+import { BlocksSequence } from "./components/Blocks";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -108,6 +110,8 @@ export const SEQUENCES_SLIDE: Array<{
     ),
   },
   QTableSequence,
+  EquationSequence,
+  BlocksSequence,
   LastMazeSequence,
   BookSequence,
   ReferencesSequence,

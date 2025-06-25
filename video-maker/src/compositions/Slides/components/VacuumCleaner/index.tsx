@@ -8,7 +8,7 @@ const START_TIME = 280;
 const FINISH_TIME = 600;
 
 const Component = (props: SeqProps) => (
-  <DarkSlide {...props}>
+  <DarkSlide name="Vacuum Cleaner" {...props}>
     <OffthreadVideo
       className="h-[95%]"
       startFrom={280}

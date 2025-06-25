@@ -3,13 +3,13 @@ import { DarkSlide } from "../../../../components/Slide";
 import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 
-export const NESSequence = {
-  durationInFrames: 170,
+export const EquationSequence = {
+  durationInFrames: 140,
   Component: (props: SeqProps) => (
-    <DarkSlide name="NES" {...props}>
-      <Img src={staticFile("nes.png")} alt="" className="h-[50%]" />
+    <DarkSlide name="Equation" {...props}>
+      <Img src={staticFile("go_board.png")} alt="" className="h-full" />
       <Anchor />
-      <Audio src={staticFile("audio/nes.opus")} />
+      <Audio src={staticFile("audio/go.opus")} />
     </DarkSlide>
   ),
 };

@@ -141,7 +141,7 @@ const Component = (props: SeqProps) => {
   const relativeFrame = frame - (props.from ?? 0);
 
   return (
-    <DarkSlide {...props}>
+    <DarkSlide name="Rewards" {...props}>
       <div className="flex flex-col gap-12">
         <Criteria points="-1" title="Bater na parede" opacity={1}>
           <Crash />

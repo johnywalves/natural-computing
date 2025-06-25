@@ -6,7 +6,7 @@ import { Anchor } from "../../../../components/Anchor";
 export const RLSequence = {
   durationInFrames: 320,
   Component: (props: SeqProps) => (
-    <DarkSlide {...props}>
+    <DarkSlide name="RL" {...props}>
       <Img src={staticFile("bulb.svg")} alt="" className="w-full" />
       <Chapter text="Aprendizado por Reforço" />
       <Anchor />
