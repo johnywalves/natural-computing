@@ -15,7 +15,7 @@ const Component = (props: SeqProps) => {
         muted
       />
       <Anchor />
-      <Audio src={staticFile("audio/micro_mouse.opus")} />
+      <Audio src={staticFile("audio/micro_mouse.ogg")} />
       <Source text="https://www.youtube.com/watch?v=CLwICJKV4dw&t=21s&ab_channel=JUING-HUEI" />
     </DarkSlide>
   );

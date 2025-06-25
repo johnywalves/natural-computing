@@ -45,7 +45,7 @@ export const SEQUENCES_SLIDE: Array<{
       <DarkSlide name="Renata" {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
         <Anchor />
-        <Audio src={staticFile("audio/renata.opus")} />
+        <Audio volume={2} src={staticFile("audio/renata.ogg")} />
       </DarkSlide>
     ),
   },
