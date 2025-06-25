@@ -1,11 +1,7 @@
 import { AbsoluteFill, Sequence, SequenceProps } from "remotion";
 import { TEXT_SLIDE } from "../../constants/colors";
 import { CSSProperties, ReactNode } from "react";
-
-const textNeonStyle = (color: string) => ({
-  color,
-  textShadow: `0 0 16px ${color}, 0 0 32px ${color}80, 0 0 64px ${color}80`,
-});
+import { textNeonStyle } from "../../utils/stylesFunctions";
 
 export const Chapter = ({
   text,
