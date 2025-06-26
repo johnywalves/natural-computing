@@ -130,8 +130,8 @@ animation-delay: calc({(1 - $i)/$n} * duration)}
 }
 
 @theme {
-  --animate-crash: crash 1.5s ease-in-out infinite;
-  --animate-pass: pass 2s linear infinite;
-  --animate-run: run 2s linear infinite;
-  --animate-finish: finish 2s linear infinite;
+  --animate-crash: crash 3s ease-in-out infinite;
+  --animate-pass: pass 4s linear infinite;
+  --animate-run: run 4s linear infinite;
+  --animate-finish: finish 4s linear infinite;
 }

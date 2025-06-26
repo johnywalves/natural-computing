@@ -4,7 +4,7 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Audio, staticFile } from "remotion";
 
 export const QTableZeroSequence = {
-  durationInFrames: 320,
+  durationInFrames: 700,
   Component: (props: SeqProps) => {
     return (
       <DarkSlide name="Q-Table" {...props}>

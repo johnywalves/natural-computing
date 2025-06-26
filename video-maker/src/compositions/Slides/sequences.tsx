@@ -28,6 +28,10 @@ import { EquationSequence } from "./components/Equation";
 import { BlocksSequence } from "./components/Blocks";
 import { QTableZeroSequence } from "./components/QTableZero";
 import { MazeHundredSequence } from "./components/MazeHundred";
+import { EquationRevealSequence } from "./components/EquationReveal";
+import { ProcessSequence } from "./components/Process";
+import { EquationAlgorithmsSequence } from "./components/EquationAlgoritms";
+import { CulturalSequence } from "./components/Cultural";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -76,6 +80,7 @@ export const SEQUENCES_SLIDE: Array<{
   },
   VacuumCleaner,
   EnvironmentSequence,
+  BlocksSequence,
   MazeThirtySequence,
   {
     durationInFrames: 190,
@@ -120,13 +125,16 @@ export const SEQUENCES_SLIDE: Array<{
       </DarkSlide>
     ),
   },
+  EquationAlgorithmsSequence,
   QTableZeroSequence,
   MazeHundredSequence,
   QTableSequence,
+  ProcessSequence,
+  EquationRevealSequence,
   EquationSequence,
-  BlocksSequence,
   LastMazeSequence,
   BookSequence,
   ReferencesSequence,
+  CulturalSequence,
   ThanksSequence,
 ];
