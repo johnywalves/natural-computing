@@ -1,9 +1,10 @@
 import { DarkSlide } from "../../../../components/Slide";
 import { Anchor } from "../../../../components/Anchor";
 import { SeqProps } from "../../../../compositions/Slides/types";
+import { Audio, staticFile } from "remotion";
 
 export const QTableSequence = {
-  durationInFrames: 320,
+  durationInFrames: 430,
   Component: (props: SeqProps) => {
     return (
       <DarkSlide name="Q-Table" {...props}>
@@ -55,6 +56,7 @@ export const QTableSequence = {
           </div>
         </div>
         <Anchor />
+        <Audio src={staticFile("audio/q-table.ogg")} />
       </DarkSlide>
     );
   },

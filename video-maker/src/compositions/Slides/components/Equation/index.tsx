@@ -4,6 +4,7 @@ import { Anchor } from "../../../../components/Anchor";
 import { textNeonStyle } from "../../../../utils/stylesFunctions";
 import { TEXT_SLIDE } from "../../../../constants/colors";
 import { ReactNode } from "react";
+import { Audio, staticFile } from "remotion";
 
 const WrapperLine = ({ children }: { children: ReactNode }) => (
   <p
@@ -19,7 +20,7 @@ const Strong = ({ children }: { children: ReactNode }) => (
 );
 
 export const EquationSequence = {
-  durationInFrames: 140,
+  durationInFrames: 2325,
   Component: (props: SeqProps) => (
     <DarkSlide name="Equation" {...props}>
       <div className="flex flex-col gap-2">
@@ -65,6 +66,7 @@ export const EquationSequence = {
         </WrapperLine>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/equation.ogg")} />
     </DarkSlide>
   ),
 };

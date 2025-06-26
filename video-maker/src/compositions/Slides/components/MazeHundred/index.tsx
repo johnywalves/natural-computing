@@ -1,4 +1,4 @@
-import { useCurrentFrame } from "remotion";
+import { Audio, staticFile, useCurrentFrame } from "remotion";
 import { SeqProps } from "../../../../compositions/Slides/types";
 import { TRAINING_MAZE } from "../../../../utils/maze";
 import Manifesto from "../../../../paths/manifesto.json";
@@ -24,11 +24,12 @@ const Component = (props: SeqProps) => {
       />
       <Maze data={TRAINING_MAZE} path={HUNDRED_EPISODE.path} />
       {frame - (props.from ?? 0) > 50 ? <Anchor /> : null}
+      <Audio src={staticFile("audio/hundred.ogg")} />
     </DarkSlide>
   );
 };
 
 export const MazeHundredSequence = {
-  durationInFrames: 690,
+  durationInFrames: 680,
   Component,
 };

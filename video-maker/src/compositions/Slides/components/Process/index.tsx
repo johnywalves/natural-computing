@@ -4,9 +4,10 @@ import { Anchor } from "../../../../components/Anchor";
 import { textNeonStyle } from "../../../../utils/stylesFunctions";
 import { TEXT_SLIDE } from "../../../../constants/colors";
 import { BlockRender } from "../Blocks";
+import { Audio, staticFile } from "remotion";
 
 export const ProcessSequence = {
-  durationInFrames: 140,
+  durationInFrames: 1250,
   Component: (props: SeqProps) => (
     <DarkSlide name="Process" {...props}>
       <div className="flex flex-col gap-16 justify-center items-center">
@@ -44,6 +45,7 @@ export const ProcessSequence = {
         </p>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/process.ogg")} />
     </DarkSlide>
   ),
 };
