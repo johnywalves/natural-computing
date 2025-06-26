@@ -12,7 +12,7 @@ export const Chapter = ({
 }) => (
   <div className="flex flex-col gap-10 p-15">
     <h1
-      className="text-[30vh] text-center font-semibold item self-start"
+      className="text-[13.5rem] text-center font-semibold item self-start"
       style={textNeonStyle(TEXT_SLIDE)}
     >
       {text}

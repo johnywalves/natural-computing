@@ -30,29 +30,29 @@ const Component = (props: SeqProps) => {
   return (
     <DarkSlide name="Directions" {...props}>
       <div className="grid grid-cols-2 gap-32">
-        <WrapperItem relativeFrame={relativeFrame} moment={0}>
+        <WrapperItem relativeFrame={relativeFrame} moment={100}>
           <div className="arrow" />
         </WrapperItem>
 
-        <WrapperItem relativeFrame={relativeFrame} moment={30}>
+        <WrapperItem relativeFrame={relativeFrame} moment={120}>
           <div className="arrow south" />
         </WrapperItem>
 
-        <WrapperItem relativeFrame={relativeFrame} moment={60}>
+        <WrapperItem relativeFrame={relativeFrame} moment={142}>
           <div className="arrow east" />
         </WrapperItem>
 
-        <WrapperItem relativeFrame={relativeFrame} moment={90}>
+        <WrapperItem relativeFrame={relativeFrame} moment={155}>
           <div className="arrow west" />
         </WrapperItem>
       </div>
       <Anchor />
-      <Audio src={staticFile("audio/directions.opus")} />
+      <Audio src={staticFile("audio/directions.ogg")} />
     </DarkSlide>
   );
 };
 
 export const DirectionSequence = {
-  durationInFrames: 270,
+  durationInFrames: 280,
   Component,
 };

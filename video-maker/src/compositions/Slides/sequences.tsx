@@ -26,6 +26,8 @@ import { JohnySequence } from "./components/Johny";
 import { GOSequence } from "./components/GO";
 import { EquationSequence } from "./components/Equation";
 import { BlocksSequence } from "./components/Blocks";
+import { QTableZeroSequence } from "./components/QTableZero";
+import { MazeHundredSequence } from "./components/MazeHundred";
 
 export const SEQUENCES_SLIDE: Array<{
   durationInFrames: number;
@@ -40,7 +42,7 @@ export const SEQUENCES_SLIDE: Array<{
     ),
   },
   {
-    durationInFrames: 220,
+    durationInFrames: 510,
     Component: (props: SeqProps) => (
       <DarkSlide name="Renata" {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
@@ -55,29 +57,32 @@ export const SEQUENCES_SLIDE: Array<{
   RLSequence,
   JohnySequence,
   {
-    durationInFrames: 530,
+    durationInFrames: 170,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         {getLoopSequence()}
-        <Audio src={staticFile("audio/markov.opus")} />
+        <Audio src={staticFile("audio/markov.ogg")} />
       </DarkSlide>
     ),
   },
   {
-    durationInFrames: 300,
+    durationInFrames: 700,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>{getLoopSequence("environment")}</DarkSlide>
+      <DarkSlide {...props}>
+        {getLoopSequence("environment")}
+        <Audio src={staticFile("audio/environment.ogg")} />
+      </DarkSlide>
     ),
   },
   VacuumCleaner,
   EnvironmentSequence,
   MazeThirtySequence,
   {
-    durationInFrames: 165,
+    durationInFrames: 190,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         {getLoopSequence("action")}
-        <Audio src={staticFile("audio/actions.opus")} />
+        <Audio src={staticFile("audio/actions.ogg")} />
       </DarkSlide>
     ),
   },
@@ -85,11 +90,11 @@ export const SEQUENCES_SLIDE: Array<{
   NESSequence,
   DirectionSequence,
   {
-    durationInFrames: 310,
+    durationInFrames: 320,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>
+      <DarkSlide name="State" {...props}>
         {getLoopSequence("state")}
-        <Audio src={staticFile("audio/state.opus")} />
+        <Audio src={staticFile("audio/state.ogg")} />
       </DarkSlide>
     ),
   },
@@ -97,18 +102,26 @@ export const SEQUENCES_SLIDE: Array<{
   BostonDynamicsSequence,
   MazeStateSequence,
   {
-    durationInFrames: 300,
+    durationInFrames: 180,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>{getLoopSequence("reward")}</DarkSlide>
+      <DarkSlide {...props}>
+        {getLoopSequence("reward")}
+        <Audio src={staticFile("audio/reward.ogg")} />
+      </DarkSlide>
     ),
   },
   RewardsSequence,
   {
-    durationInFrames: 300,
+    durationInFrames: 480,
     Component: (props: SeqProps) => (
-      <DarkSlide {...props}>{getLoopSequence("agent")}</DarkSlide>
+      <DarkSlide {...props}>
+        {getLoopSequence("agent")}
+        <Audio src={staticFile("audio/agent.ogg")} />
+      </DarkSlide>
     ),
   },
+  QTableZeroSequence,
+  MazeHundredSequence,
   QTableSequence,
   EquationSequence,
   BlocksSequence,

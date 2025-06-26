@@ -28,6 +28,6 @@ const Component = (props: SeqProps) => {
 };
 
 export const MazeFirstSequence = {
-  durationInFrames: 20 * 30,
+  durationInFrames: 14 * 30,
   Component,
 };

@@ -9,7 +9,7 @@ export const GOSequence = {
     <DarkSlide {...props}>
       <Img src={staticFile("go_board.png")} alt="" className="h-full" />
       <Anchor />
-      <Audio src={staticFile("audio/go.opus")} />
+      <Audio src={staticFile("audio/go.ogg")} />
     </DarkSlide>
   ),
 };

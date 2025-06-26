@@ -4,13 +4,13 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 
 export const RLSequence = {
-  durationInFrames: 320,
+  durationInFrames: 130,
   Component: (props: SeqProps) => (
     <DarkSlide name="RL" {...props}>
       <Img src={staticFile("bulb.svg")} alt="" className="w-full" />
       <Chapter text="Aprendizado por Reforço" />
       <Anchor />
-      <Audio src={staticFile("audio/rl.opus")} />
+      <Audio src={staticFile("audio/rl.ogg")} />
     </DarkSlide>
   ),
 };

@@ -4,12 +4,12 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 
 export const NESSequence = {
-  durationInFrames: 170,
+  durationInFrames: 300,
   Component: (props: SeqProps) => (
     <DarkSlide name="NES" {...props}>
       <Img src={staticFile("nes.png")} alt="" className="h-[50%]" />
       <Anchor />
-      <Audio src={staticFile("audio/nes.opus")} />
+      <Audio src={staticFile("audio/nes.ogg")} />
     </DarkSlide>
   ),
 };

@@ -3,7 +3,8 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import { TRAINING_MAZE } from "../../../../utils/maze";
 import Maze from "../../../../components/Maze";
-import { useCurrentFrame } from "remotion";
+import { useRelativeFrame } from "../../../../hooks/useRelativeFrame";
+import { Audio, staticFile } from "remotion";
 
 const Dot = ({ x, y }: { x: string; y: string }) => {
   return (
@@ -19,21 +20,20 @@ const Dot = ({ x, y }: { x: string; y: string }) => {
 };
 
 export const MazeStateSequence = {
-  durationInFrames: 510,
+  durationInFrames: 220,
   Component: (props: SeqProps) => {
-    const frame = useCurrentFrame();
-    const relativeFrame = frame - (props.from ?? 0);
+    const relativeFrame = useRelativeFrame(props.from);
 
     return (
       <DarkSlide name="Maze State" {...props}>
         <Maze data={TRAINING_MAZE} path={[]} />
         <Anchor />
-        <Dot x="25.5%" y="86%" />
-        <Dot x="68%" y="28%" />
-        <Dot x="52.5%" y="44.5%" />
-
-        {relativeFrame > 150 ? <Dot x="24%" y="84%" /> : null}
-        {relativeFrame > 170 ? <Dot x="46.75%" y="45%" /> : null}
+        {relativeFrame > 2 ? <Dot x="25.5%" y="86%" /> : null}
+        {relativeFrame > 30 ? <Dot x="68%" y="28%" /> : null}
+        {relativeFrame > 60 ? <Dot x="52.5%" y="44.5%" /> : null}
+        {relativeFrame > 90 ? <Dot x="28.5%" y="34.5%" /> : null}
+        {relativeFrame > 120 ? <Dot x="58.5%" y="70.5%" /> : null}
+        <Audio src={staticFile("audio/mazestate.ogg")} />
       </DarkSlide>
     );
   },

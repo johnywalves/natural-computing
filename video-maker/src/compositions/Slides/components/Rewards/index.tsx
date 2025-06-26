@@ -4,7 +4,7 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import Neon from "../../../../components/Neon";
 import Mouse from "../../../../components/Mouse";
-import { useCurrentFrame } from "remotion";
+import { Audio, staticFile, useCurrentFrame } from "remotion";
 
 const Criteria = ({
   points,
@@ -143,14 +143,18 @@ const Component = (props: SeqProps) => {
   return (
     <DarkSlide name="Rewards" {...props}>
       <div className="flex flex-col gap-12">
-        <Criteria points="-1" title="Bater na parede" opacity={1}>
+        <Criteria
+          points="-1"
+          title="Bater na parede"
+          opacity={relativeFrame > 140 ? 1 : 0}
+        >
           <Crash />
         </Criteria>
 
         <Criteria
           points="-0.1"
           title="Mover caminho livre"
-          opacity={relativeFrame > 120 ? 1 : 0}
+          opacity={relativeFrame > 520 ? 1 : 0}
         >
           <Pass />
         </Criteria>
@@ -158,17 +162,18 @@ const Component = (props: SeqProps) => {
         <Criteria
           points="+100"
           title="Chegar ao centro"
-          opacity={relativeFrame > 240 ? 1 : 0}
+          opacity={relativeFrame > 1000 ? 1 : 0}
         >
           <Finish />
         </Criteria>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/rewardsteps.ogg")} />
     </DarkSlide>
   );
 };
 
 export const RewardsSequence = {
-  durationInFrames: 360,
+  durationInFrames: 1650,
   Component,
 };
