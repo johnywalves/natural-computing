@@ -3,6 +3,7 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import Neon from "../../../../components/Neon";
 import { BINARY_MODEL_BORDER } from "../../../../constants/models";
+import { Audio, staticFile } from "remotion";
 
 const models = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -33,7 +34,7 @@ export const BlockRender = ({
 };
 
 export const BlocksSequence = {
-  durationInFrames: 140,
+  durationInFrames: 640,
   Component: (props: SeqProps) => (
     <DarkSlide name="Blocks" {...props}>
       <div className="absolute w-[60rem] h-[60rem] grid grid-cols-4 gap-8">
@@ -42,6 +43,7 @@ export const BlocksSequence = {
         ))}
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/blocks.ogg")} />
     </DarkSlide>
   ),
 };

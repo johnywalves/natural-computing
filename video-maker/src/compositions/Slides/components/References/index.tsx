@@ -1,9 +1,10 @@
+import { Audio, staticFile } from "remotion";
 import { Anchor } from "../../../../components/Anchor";
 import { DarkSlide } from "../../../../components/Slide";
 import { SeqProps } from "../../../../compositions/Slides/types";
 
 export const ReferencesSequence = {
-  durationInFrames: 320,
+  durationInFrames: 410,
   Component: (props: SeqProps) => {
     return (
       <DarkSlide name="References" {...props}>
@@ -19,6 +20,7 @@ export const ReferencesSequence = {
           </p>
         </div>
         <Anchor />
+        <Audio src={staticFile("audio/reference.ogg")} />
       </DarkSlide>
     );
   },

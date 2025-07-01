@@ -3,9 +3,10 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import { textNeonStyle } from "../../../../utils/stylesFunctions";
 import { TEXT_SLIDE } from "../../../../constants/colors";
+import { Audio, staticFile } from "remotion";
 
 export const EquationRevealSequence = {
-  durationInFrames: 140,
+  durationInFrames: 280,
   Component: (props: SeqProps) => (
     <DarkSlide name="Equation Reveals" {...props}>
       <div className="flex flex-col gap-2">
@@ -18,6 +19,7 @@ export const EquationRevealSequence = {
         </p>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/equation-reveal.ogg")} />
     </DarkSlide>
   ),
 };

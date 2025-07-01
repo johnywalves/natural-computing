@@ -3,9 +3,10 @@ import { SeqProps } from "../../../../compositions/Slides/types";
 import { Anchor } from "../../../../components/Anchor";
 import { textNeonStyle } from "../../../../utils/stylesFunctions";
 import { TEXT_SLIDE } from "../../../../constants/colors";
+import { Audio, staticFile } from "remotion";
 
 export const EquationAlgorithmsSequence = {
-  durationInFrames: 140,
+  durationInFrames: 630,
   Component: (props: SeqProps) => (
     <DarkSlide name="Equation Algorithms" {...props}>
       <div className="flex flex-col items-center gap-16 text-[4rem] ">
@@ -18,6 +19,7 @@ export const EquationAlgorithmsSequence = {
         <p style={textNeonStyle(TEXT_SLIDE)}>Q-learning</p>
       </div>
       <Anchor />
+      <Audio src={staticFile("audio/algoriths.ogg")} />
     </DarkSlide>
   ),
 };

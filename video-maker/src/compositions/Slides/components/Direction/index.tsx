@@ -42,7 +42,7 @@ const Component = (props: SeqProps) => {
           <div className="arrow east" />
         </WrapperItem>
 
-        <WrapperItem relativeFrame={relativeFrame} moment={155}>
+        <WrapperItem relativeFrame={relativeFrame} moment={170}>
           <div className="arrow west" />
         </WrapperItem>
       </div>

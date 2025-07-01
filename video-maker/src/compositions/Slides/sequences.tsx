@@ -38,7 +38,7 @@ export const SEQUENCES_SLIDE: Array<{
   Component: (props: SeqProps) => ReactNode;
 }> = [
   {
-    durationInFrames: 30,
+    durationInFrames: 90,
     Component: (props: SeqProps) => (
       <DarkSlide name="Opening" {...props}>
         <Img src={staticFile("renata.jpg")} alt="" className="w-6xl" />
@@ -117,7 +117,7 @@ export const SEQUENCES_SLIDE: Array<{
   },
   RewardsSequence,
   {
-    durationInFrames: 480,
+    durationInFrames: 460,
     Component: (props: SeqProps) => (
       <DarkSlide {...props}>
         {getLoopSequence("agent")}

@@ -22,6 +22,6 @@ const Component = (props: SeqProps) => {
 };
 
 export const ChallengeSequence = {
-  durationInFrames: 520,
+  durationInFrames: 560,
   Component,
 };
