@@ -25,6 +25,10 @@ python3 algorithms/perceptron/report.py
 ```
 
 ```bash
+python3 algorithms/optimization
+```
+
+```bash
 python3 maze-solve
 ```
 
