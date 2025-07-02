@@ -33,6 +33,16 @@ class PDFReport(FPDF):
         self.chapter_title(title)
         self.chapter_body(body)
 
+    def add_bold(self, text):
+        self.set_font('Arial_ttf', 'B', 10)
+        self.cell(36, 6, text, align='L')
+        self.ln()        
+
+    def add_text(self, text):
+        self.set_font('Arial_ttf', '', 10)
+        self.cell(36, 6, text, align='L')
+        self.ln()
+
     # Converte a figura matplotlib para imagem e adiciona ao PDF
     def add_plot(self, fig, x=10, w=190):
         img_data = BytesIO()

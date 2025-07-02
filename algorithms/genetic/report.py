@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os
 import bitstring
 import maximization
 import rosenbrock
@@ -26,6 +27,7 @@ def generate_elitism_plot(pop_size, elite_size):
     plt.xlabel('Geração')
     plt.ylabel('Valor da Função')
     plt.legend()
+    plt.savefig(os.path.join('figs', "ga_learn.jpg"))
     plt.grid(True)
     return plt, best_result
 

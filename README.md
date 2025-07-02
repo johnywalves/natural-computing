@@ -18,11 +18,13 @@ pipenv shell
 python3 algorithms/genetic/report.py
 ```
 
-## Perceptron
+### Perceptron
 
 ```bash
 python3 algorithms/perceptron/report.py
 ```
+
+### PSO e ASO
 
 ```bash
 python3 algorithms/optimization
