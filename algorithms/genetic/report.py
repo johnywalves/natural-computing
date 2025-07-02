@@ -20,15 +20,16 @@ def generate_convergence_plot(result_tournament, result_roulette, result_sus, ti
 def generate_elitism_plot(pop_size, elite_size):
     best_result = rosenbrock.genetic_algorithm(pop_size=pop_size, elite_size=elite_size)
 
-    plt.figure(figsize=(10, 4))
+    plt.figure(figsize=(10, 6))
     plt.plot(best_result['history']['best'], label='Melhor Fitness')
     plt.plot(best_result['history']['average'], label='Fitness Médio')
     plt.title(f"Melhor Execução (População={pop_size}, Elitismo={elite_size}%, Melhor X {best_result['best_x']:.2f}, Melhor Y {best_result['best_y']:.2f})")
     plt.xlabel('Geração')
     plt.ylabel('Valor da Função')
+    plt.grid()
     plt.legend()
+    plt.tight_layout()
     plt.savefig(os.path.join('figs', "ga_learn.jpg"))
-    plt.grid(True)
     return plt, best_result
 
 def generate_full_report():

@@ -2,7 +2,7 @@ import numpy as np
 from bitstring import DEFAULT_CROSSOVER, DEFAULT_MUTATION, create_individual, mutate, crossover
 from maximization import tournament_selection
 
-SEARCH_SPACE = (-10, 10)
+SEARCH_SPACE = (-5, 5)
 BITSTRING_LENGTH = 30
 POP_SIZE = [150, 200, 300]
 MAX_GENERATIONS = 200
